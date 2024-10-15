@@ -11,11 +11,11 @@ function UserFooter() {
           <div className='row'>
             <div className='col-lg-3 col-md-6 col-sm-12'>
             <img  className='col-4 footer-img' src={logo} alt='Admin Footer Logo'/>
-            <span className="footer-logo-text-change1 ml-2">LEGAL LIAISON</span>           
+            <span className="footer-logo-text-change1 ml-2">JudiSys</span>           
             </div>
             <div className='col-lg-3 col-md-6 col-sm-12'>
                 <h2 className='footer-title lawyer'>Lawyer</h2>
-                <p className='footer-list lawyer-intro'>Welcome to Legal Liaision. 
+                <p className='footer-list lawyer-intro'>Welcome to JudiSys. 
                     Your trusted Partner in legal services.
                     We are a team of dedicated and experienced legal professionals commited to providing high-quality legal solutions tailored to your needs.</p>
             </div>

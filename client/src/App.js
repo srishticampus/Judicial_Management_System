@@ -12,6 +12,9 @@ import AboutUs from './Components/Common/AboutUs';
 import UserFooter from './Components/Common/UserFooter';
 import LandingServices from './Components/LandingPage/LandingServices';
 import ContactUs from './Components/Common/ContactUs';
+import AdminLogin from './Components/Admin/Login/AdminLogin';
+import AdminFooter from './Components/Admin/Common/AdminFooter';
+import UserRegistration from './Components/User/UserRegistration';
 
 function App() {
   return (
@@ -24,7 +27,17 @@ function App() {
           <Route path="/aboutus" element={[<LandingNavbar />,<AboutUs />,<UserFooter />]} />
           <Route path="/services" element={[<LandingNavbar />,<LandingServices/>,<UserFooter />]} />
           <Route path="/contactus" element={[<LandingNavbar />,<ContactUs />,<UserFooter />]} />
-          </Routes>
+
+
+
+          {/* Admin  */}
+          <Route path="/admin-login" element={[<LandingNavbar />, <AdminLogin />, <AdminFooter/>]} />
+
+
+
+  {/* user */}
+  <Route path="/UserRegistration" element={[<LandingNavbar />, <UserRegistration />,<UserFooter/>]} />
+  </Routes>
       </div>
     </BrowserRouter>
     </div>
