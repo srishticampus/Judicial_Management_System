@@ -4,34 +4,119 @@ import "../../Styles/UserReg.css";
 import img from '../../Assets/clientReg.png';
 import { toast } from "react-toastify";
 import 'remixicon/fonts/remixicon.css';
+import axiosInstance from "../Constants/BaseUrl";
+import axiosMultipartInstance from "../Constants/FormDataUrl";
 
 function UserRegistration() {
-    const navigate = useNavigate();
+    const [data, setData] = useState('');
 
-    const [isToastVisible, setToastVisible] = useState(false);
-    const [showPassword, setShowPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState(false)
+    const [errors, setErrors] = useState({});
+    const navigate = useNavigate();
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setData({
+          ...data,
+          [name]: value,
+        });
+      };
+    const validate = () => {
+        const newErrors = {};
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+        const phoneRegex = /^\d{10}$/;
+        const aadharRegex = /^\d{12}$/;
+        if (!data.email) {
+            console.log("here");
 
-    const onSubmit = (values) => {
-       
-    };
-    const handleChange = (values) => {
-       
-    };
+            newErrors.email = 'Email is required';
+        } else if (!emailRegex.test(data.email)) {
+            newErrors.email = 'Invalid email format';
+        }
+    
+        if (!data.password) {
+          newErrors.password = 'Password is required';
+        }
+        else if (!passwordRegex.test(data.password)) {
+            newErrors.password = 'Password Must Contain 1 Uppercase,1 Symbol and 1 Number with minimum 6 characters';
+        }
+        if (!data.aadhar) {
+            newErrors.aadhar = 'Aadhar is required';
+          }
+          else if (!aadharRegex.test(data.aadhar)) {
+            newErrors.aadhar = 'Invalid Aadhar Number';
+        }
+          if (!data.city) {
+            newErrors.city = 'city is required';
+          }
+          if (!data.name) {
+            newErrors.name = 'name is required';
+          }
+          if (!data.contact) {
+            newErrors.contact = 'contact is required';
+          }
+          else if (!phoneRegex.test(data.contact)) {
+            newErrors.contact = 'Invalid Contact Number';
+        }
+          if (!data.dob) {
+            newErrors.dob = 'Date Of Birth is required';
+          }
+          if (!data.profilePic) {
+            newErrors.profilePic = 'Profile Picture is required';
+          }
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+      };
+    
+      const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log(errors);
+        
+        console.log("api called",validate());
+        
+        if (!validate()) {
+          toast.error('Please fix the errors in the form.');
+          return;
+        }
 
+        axiosMultipartInstance
+
+        .post(`/registerUser`,data)
+        .then((res) => {
+          console.log(res);
+          if (res.data.status === 200) {
+            setData(res.data.data || []);
+          } else {
+            setData([]);
+          }
+        })
+        .catch((error) => {
+          console.error("Error!", error);
+        });
+    };
+    const handleImageChange = (e) => {
+        console.log("in file", e.target.files[0]);
+        
+        const file = e.target.files[0];
+        setData({
+          ...data,
+          profilePic: file,
+        });
+      };
   
 
     return (
         <div className="user_registration">
-            <p>User Registration</p>
+        
             <div className="user_registration_container">
                 <div className="user_registration_box1">
                     <div className="user_registration_input_group">
                         <form 
-                        // onSubmit={(e)=>{handleSubmit(e)}}
+                        onSubmit={(e)=>{handleSubmit(e)}}
                         >
                             <div className="user_registration_input">
                                 <label>Name</label>
@@ -44,7 +129,9 @@ function UserRegistration() {
                                     onChange={handleChange}
                                     
                                 />
-                               
+                                   {errors.name && (
+                                    <span className="text-danger">{errors.name}</span>
+                                )}
                             </div>
                             <div className="user_registration_input mt-3">
                                 <label>Email</label>
@@ -57,37 +144,38 @@ function UserRegistration() {
                                     onChange={handleChange}
                                    
                                 />
-                                {/* {errors.email && touched.email && (
+                                {errors.email && (
                                     <span className="text-danger">{errors.email}</span>
-                                )} */}
+                                )}
                             </div>
                             <div className="user_registration_input mt-3">
                                 <label>Contact</label>
                                 <input
-                                    type="number"
+                                    type="text"
                                     className="form-control border border-dark"
                                     placeholder="Enter your contact"
                                     name="contact"
-                                   
+                                    onChange={handleChange}
+
                                 />
-                                {/* {errors.contact && touched.contact && (
+                                {errors.contact &&  (
                                     <span className="text-danger">{errors.contact}</span>
-                                )} */}
+                                )}
                             </div>
                             <div className="user_registration_input mt-3">
-                                <label>Address</label>
+                                <label>City</label>
                                 <input
                                     type="text"
                                     className="form-control border border-dark"
                                     placeholder="Enter your address"
-                                    name="address"
+                                    name="city"
                                
                                     onChange={handleChange}
                                     
                                 />
-                                {/* {errors.address && touched.address && (
-                                    <span className="text-danger">{errors.address}</span>
-                                )} */}
+                                {errors.city &&  (
+                                    <span className="text-danger">{errors.city}</span>
+                                )}
                             </div>
                             <div className="user_registration_input mt-3">
                                 <label>DOB</label>
@@ -99,9 +187,9 @@ function UserRegistration() {
                                     onChange={handleChange}
                                   
                                 />
-                                {/* {errors.dob && touched.dob && (
+                                {errors.dob && (
                                     <span className="text-danger">{errors.dob}</span>
-                                )} */}
+                                )}
                             </div>
                             <div className="user_registration_input mt-3">
                                 <label>Gender</label>
@@ -117,9 +205,9 @@ function UserRegistration() {
                                     <option value="female" label="Female" />
                                     <option value="other" label="Other" />
                                 </select>
-                                {/* {errors.gender && touched.gender && (
+                                {errors.gender  && (
                                     <span className="text-danger">{errors.gender}</span>
-                                )} */}
+                                )}
                             </div>
                             <div className="user_registration_input mt-3">
                                 <label>Profile Picture</label>
@@ -127,28 +215,26 @@ function UserRegistration() {
                                     type="file"
                                     className="form-control border border-dark"
                                     name="profilePic"
-                                    // onChange={(event) => {
-                                    //     setFieldValue("profilePic", event.currentTarget.files[0]);
-                                    // }}
+                                    onChange={handleImageChange}
                                 />
-                                {/* {errors.profilePic && touched.profilePic && (
+                                {errors.profilePic  && (
                                     <span className="text-danger">{errors.profilePic}</span>
-                                )} */}
+                                )}
                             </div>
                             <div className="user_registration_input mt-3">
-                                <label>Nationality</label>
+                                <label>Aadhar Number</label>
                                 <input
                                     type="text"
                                     className="form-control border border-dark"
                                     placeholder="Enter your nationality"
-                                    name="nationality"
+                                    name="aadhar"
                                 
                                     onChange={handleChange}
                                    
                                 />
-                                {/* {errors.nationality && touched.nationality && (
-                                    <span className="text-danger">{errors.nationality}</span>
-                                )} */}
+                                {errors.aadhar && (
+                                    <span className="text-danger">{errors.aadhar}</span>
+                                )}
                             </div>
                             <div className="user_registration_input mt-3">
                                 <label>Password</label>
@@ -164,9 +250,9 @@ function UserRegistration() {
                                     />
                                    
                                 </div>
-                                {/* {errors.password && touched.password && (
+                                {errors.password  && (
                                     <span className="text-danger">{errors.password}</span>
-                                )} */}
+                                )}
                             </div>
                             <div className="user_registration_button text-center mt-3">
                                 <button type="submit">Register</button>
