@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'remixicon/fonts/remixicon.css';
 import './App.css';
+import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Landingcarousel from './Components/LandingPage/Landingcarousel';
 import AboutUs from './Components/Common/AboutUs';
@@ -15,11 +16,26 @@ import ContactUs from './Components/Common/ContactUs';
 import AdminLogin from './Components/Admin/Login/AdminLogin';
 import AdminFooter from './Components/Admin/Common/AdminFooter';
 import UserRegistration from './Components/User/UserRegistration';
+import AdminMain from './Components/Admin/Dashboard/AdminMain';
+import AdminNav from './Components/Admin/Common/AdminNav';
+import ScrollToTop from './ScrollToTop';
+import { ToastContainer, toast } from 'react-toastify';
+import UserLogin from './Components/User/UserLogin';
+import UserHome from './Components/User/UserHome';
+import UserNavbar from './Components/User/UserNavbar';
+import UserProfile from './Components/User/UserProfile';
 
 function App() {
   return (
     <div className="App">
+      
        <BrowserRouter basename="Judisys">
+       <ScrollToTop />
+      <ToastContainer
+        autoClose={3000}  // 3 seconds default close time
+        hideProgressBar={true}  // Hide progress bar globally
+        position="top-right"  // Default position for all toasts
+      />
       <div>
         <Routes>
           {/* Common routes */}
@@ -32,11 +48,18 @@ function App() {
 
           {/* Admin  */}
           <Route path="/admin-login" element={[<LandingNavbar />, <AdminLogin />, <AdminFooter/>]} />
+          <Route path="/admin-dashboard" element={[<AdminNav />, <AdminMain data="admindashboard" />, <AdminFooter />]} />
+          <Route path="/admin-viewallusers" element={[<AdminNav />, <AdminMain data="adminviewallusers" />, <AdminFooter />]} />
+          <Route path="/admin-userreqs" element={[<AdminNav />, <AdminMain data="admin-userreqs" />, <AdminFooter />]} />
 
 
 
   {/* user */}
-  <Route path="/UserRegistration" element={[<LandingNavbar />, <UserRegistration />,<UserFooter/>]} />
+  <Route path="/user-reg" element={[<LandingNavbar />, <UserRegistration />,<UserFooter/>]} />
+  <Route path="/user-login" element={[<LandingNavbar />, <UserLogin />,<UserFooter/>]} />
+  <Route path="/user-home" element={[<UserNavbar />, <UserHome />,<UserFooter/>]} />
+  <Route path="/user_profile" element={[<UserNavbar />, <UserProfile />,<UserFooter/>]} />
+
   </Routes>
       </div>
     </BrowserRouter>

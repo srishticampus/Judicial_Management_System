@@ -8,6 +8,62 @@ import img from "../../../Assets/adlogin.jpg";
 function AdminLogin() {
 
     const navigate = useNavigate();
+    const [data, setData] = useState('');
+
+    const [showPassword, setShowPassword] = useState(false)
+    const [errors, setErrors] = useState({});
+    // useEffect(() => {
+    //     if (localStorage.getItem("admin") == 1)
+    //         navigate('/admin-home');
+    // }, []);
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setData({
+            ...data,
+            [name]: value,
+        });
+    };
+    const validate = () => {
+        const newErrors = {};
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!data.email) {
+            console.log("here");
+
+            newErrors.email = 'Email is required';
+        }
+
+        if (!data.password) {
+            newErrors.password = 'Password is required';
+        }
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
+    const handleLogin = async (e) => {
+        e.preventDefault()
+        console.log(errors);
+
+        console.log("api called", validate());
+
+        if (!validate()) {
+            toast.error('Please fix the errors in the form.');
+            return;
+        }
+        const hardCodedUsername = 'admin';
+        const hardCodedPassword = 'admin@123';
+        if (data.email === hardCodedUsername && data.password === hardCodedPassword) {
+            localStorage.setItem("admin", 1);
+            toast.success('Login successful!');
+            navigate('/admin-dashboard');
+        } else {
+            toast.error('Incorrect Username or Password');
+        }
+    };
 
 
     return (
@@ -23,7 +79,7 @@ function AdminLogin() {
                         <div className="col-6">
                                 <div className="user_registration_input_group admin-login-div1">
                                     <h3 className="admin-login-h3">Admin Login</h3>
-                                    <form>
+                                    <form onSubmit={handleLogin}>
                                         <div className=" mt-5">
                                             <label>Username</label>
                                             <input
@@ -31,13 +87,13 @@ function AdminLogin() {
                                                 className="form-control border border-dark"
                                                 placeholder="Enter Username"
                                                 name="email"
-                                            // value={values.email}
-                                            // onChange={handleChange}
+                                            value={data.email}
+                                            onChange={handleChange}
 
                                             />
-                                            {/* {errors.email && touched.email && (
+                                            {errors.email && (
                     <span className="text-danger">{errors.email}</span>
-                  )} */}
+                  )}
                                         </div>
                                         <div className=" mt-4">
                                             <label>Password</label>
@@ -46,13 +102,13 @@ function AdminLogin() {
                                                 className="form-control border border-dark"
                                                 placeholder="Password"
                                                 name="password"
-                                            // value={values.password}
-                                            // onChange={handleChange}
-                                            // onBlur={handleBlur}
+                                            value={data.password}
+                                            onChange={handleChange}
+                                           
                                             />
-                                            {/* {errors.password && touched.password && (
+                                            {errors.password&& (
                     <span className="text-danger">{errors.password}</span>
-                  )} */}
+                  )}
                                         </div>
 
                                         <div className="user_registration_button text-center mt-5 d-flex justify-content-evenly">

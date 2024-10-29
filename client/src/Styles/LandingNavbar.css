@@ -1,5 +1,5 @@
 .landing_custom_navbar {
-  padding: 20px 0;
+  padding: 20px 10px;
   
 }
 
@@ -19,4 +19,31 @@
 
 .landing_custom_navbar .navbar-brand img {
   margin-right: 10px;
+}
+
+.landing_custom_navbar .dropdown-menu {
+  position: absolute;
+  top: 100%; /* Position below the button */
+  left: 0;   /* Align it with the button */
+  z-index: 1000; /* Ensure it's on top of other content */
+  max-width: 250px; /* Adjust this value based on your content */
+  word-wrap: break-word;
+}
+/* Custom dropdown styles */
+.landing_custom_navbar .dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.landing_custom_navbar .dropdown-menu {
+
+  position: absolute;
+  background-color: #fff;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  min-width: 200px;
+  padding: 10px;
+}
+
+.landing_custom_navbar .dropdown-menu a {
+  padding: 8px 16px;
+  display: block;
 }
