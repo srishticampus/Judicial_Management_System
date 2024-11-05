@@ -61,7 +61,7 @@ function LandingNavbar() {
       </Link>
     </li>
     <li>
-      <Link to="/att-login" className="dropdown-item">
+      <Link to="/advocate-login" className="dropdown-item">
        Attorney
       </Link>
     </li>
