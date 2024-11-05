@@ -7,15 +7,7 @@ import ViewAllAdvocates from "./ViewAllAdvocates";
 import ApproveRejectAdvocate from "./ApproveRejectAdvocate";
 import ViewProfile_AR from "./ViewProfile_AR";
 import "../../../Styles/AdminMain.css";
-import AdminViewAllJuniorAdvocate from "./AdminViewAllJuniorAdvocate";
-import AdminApproveRejectJuniorAdvocate from "./ViewJuniorAdvocateRequest";
-import ViewJuniorAdvocateRequest from "./ViewJuniorAdvocateRequest";
-import ViewProfile_AllJuniorAdvocates from "./ViewProfile_AllJuniorAdvocates";
-import ViewProfile_JuniorAdvocate from "./ViewProfile_JuniorAdvocate";
-import ViewProfile_JuniorAdvocateRequest from "./ViewProfile_JuniorAdvocateRequest";
-import AdminViewInternRequest from "./AdminViewInternRequest";
-import AdminViewInternProfile from "./AdminViewInternProfile";
-import AdminViewApprovedInterns from "./AdminViewApprovedInterns";
+
 import AdminViewComplaints from "./AdminViewComplaints";
 import AdminViewUsers from "./AdminViewUsers";
 import AdminViewSingleUsers from "./AdminViewSingleUsers";
@@ -55,22 +47,12 @@ function AdminMain({ data }) {
             <ViewProfile_AR view="request" />
           ) : data === "adminviewsingleadvocate" ? (
             <ViewProfile_AR view="view" />
-          ) : data === "adminviewalljunioradvocates" ? (
-            <AdminViewAllJuniorAdvocate />
-          ) : data === "approverejectjunioradvocate" ? (
-            <ViewJuniorAdvocateRequest />
-          ) : data === "adminviewprofile-alladvocates" ? (
-            <ViewProfile_AllJuniorAdvocates />
-          ) : data === "adminviewprofile-requests" ? (
-            <ViewProfile_JuniorAdvocateRequest />
-          ) : data === "approverejectIntern" ? (
-            <AdminViewInternRequest />
-          ) : data === "interndetailreq" ? (
-            <AdminViewInternProfile view="request" />
-          ) : data === "approvedInterns" ? (
-            <AdminViewApprovedInterns />
-          ) : data === "interndetails" ? (
-            <AdminViewInternProfile view="view" />
+          ) : data === "adminviewalladvocates" ? (
+            <ViewAllAdvocates />
+         
+        
+          
+        
           ) : data === "complaints" ? (
             <AdminViewComplaints />
           ) : data === "adminviewallusers" ? (

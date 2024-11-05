@@ -11,8 +11,8 @@ app.use(express.static( `${__dirname}/upload`));
 
 app.use(cors())
 const route=require('./routes')
-app.use('/judicial_api',route)
+app.use('/judisys_api',route)
 
-app.listen(4001,()=>{
-    console.log("Server created successfully at 4001");
+app.listen(4048,()=>{
+    console.log("Server created successfully at 4048");
 })

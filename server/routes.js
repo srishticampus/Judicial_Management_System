@@ -3,6 +3,7 @@ const router = express.Router();
 
 const Admin=require('./controllers/adminController')
 const User = require('./controllers/userController'); 
+const advocates = require('./controllers/advocateController'); 
 
 
 
@@ -24,5 +25,24 @@ router.post('/activateUserById/:id', User.activateUserById);
 //admin
 router.post('/adminResetPassword',Admin.adminResetPassword);
 router.post('/adminLogin',Admin.login);
+
+
+//Attorney
+//advocate routes
+router.post('/registerAdvocate',advocates.upload,advocates.registerAdvocate)
+router.post('/viewAdvocateById/:id',advocates.viewAdvocateById)
+router.post('/forgotPassword',advocates.forgotPassword)
+router.post('/loginAdvocate',advocates.login)
+router.post('/editAdvocateById/:id',advocates.uploadProfile,advocates.editAdvocateById)
+router.post('/deleteAdvocateById/:id',advocates.deleteAdvocateById)
+router.post('/resetPassword/:id',advocates.resetPassword)
+router.post('/approveAdvocateById/:id',advocates.approveAdvocateById)
+router.post('/rejectAdvocateById/:id',advocates.rejectAdvocateById)
+router.post('/viewAdvocateReqs',advocates.viewAdvocateReqs)
+router.post('/viewAdvocates',advocates.viewAdvocates)
+router.post('/activateAdvocateById/:id',advocates.activateAdvocateById)
+router.post('/deactivateAdvocateById/:id',advocates.deactivateAdvocateById)
+router.post('/viewAdvocatesBySpecializn',advocates.viewAdvocatesBySpecializn)
+router.post('/addRating/:id',advocates.addRating)
 
 module.exports = router;

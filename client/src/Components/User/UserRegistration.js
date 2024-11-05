@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import 'remixicon/fonts/remixicon.css';
 import axiosInstance from "../Constants/BaseUrl";
 import axiosMultipartInstance from "../Constants/FormDataUrl";
+import { registerWithFile } from "../Services/CommonServices";
 
 function UserRegistration() {
     const [data, setData] = useState('');
@@ -72,7 +73,7 @@ function UserRegistration() {
         return Object.keys(newErrors).length === 0;
       };
     
-      const handleSubmit = (e) => {
+      const handleSubmit = async(e) => {
         e.preventDefault()
         console.log(errors);
         
@@ -82,21 +83,27 @@ function UserRegistration() {
           toast.error('Please fix the errors in the form.');
           return;
         }
+        try {
+            console.log(data);
+            
+            const result = await registerWithFile(data, 'registerUser');
 
-        axiosMultipartInstance
+            if (result.success) {
+                console.log(result);
 
-        .post(`/registerUser`,data)
-        .then((res) => {
-          console.log(res);
-          if (res.data.status === 200) {
-            setData(res.data.data || []);
-          } else {
-            setData([]);
-          }
-        })
-        .catch((error) => {
-          console.error("Error!", error);
-        });
+                toast.success('Registration successful!');
+                navigate('/user-login');
+
+
+            } else {
+                console.error('Registration error:', result);
+                toast.error(result.message);
+            }
+        } catch (error) {
+            console.error('Unexpected error:', error);
+            toast.error('An unexpected error occurred during Registration');
+        }
+       
     };
     const handleImageChange = (e) => {
         console.log("in file", e.target.files[0]);

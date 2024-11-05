@@ -1,73 +1,80 @@
 import React, { useEffect, useState } from "react";
 import "../../../Styles/ViewAllAdvocates.css";
 import img from "../../../Assets/Vecto(2).png";
-import axiosInstance from "../../Constants/BaseUrl";
 import { Link } from "react-router-dom";
 import noData from "../../../Assets/noDataFound.json";
 import Lottie from "lottie-react";
+import { viewCount } from "../../Services/AdminService";
+import { toast } from "react-toastify";
 
 function ViewAllAdvocates() {
   const [data, setData] = useState([]);
 
   const handleActivate = (id) => {
-    axiosInstance
-      .post(`/activateAdvocateById/${id}`)
-      .then((res) => {
-        if (res.data.status === 200) {
-          const updatedData = data.map((advocate) => {
-            if (advocate._id === id) {
-              advocate.isActive = true;
-            }
-            return advocate;
-          });
-          setData(updatedData);
-        }
-      })
-      .catch((error) => {
-        console.error("Error!", error);
-      });
+  //   try {
+  //     const result = await appr('viewAdvocateReqs');
+
+  //     if (result.success) {
+  //         console.log(result);
+  //         setData(result.user);
+  //     } else {
+  //         console.error('Village Office View Error :', result);
+  //         toast.error(result.message);
+  //     }
+  // } catch (error) {
+  //     console.error('Unexpected error:', error);
+  //     toast.error('An unexpected error occurred during login');
+  // }
+    
   };
 
-  const handleDeactivate = (id) => {
-    axiosInstance
-      .post(`/deactivateAdvocateById/${id}`)
-      .then((res) => {
-        if (res.data.status === 200) {
-          const updatedData = data.map((advocate) => {
-            if (advocate._id === id) {
-              advocate.isActive = false;
-            }
-            return advocate;
-          });
-          setData(updatedData);
-        }
-      })
-      .catch((error) => {
-        console.error("Error!", error);
-      });
-  };
+  // const handleDeactivate = (id) => {
+  //   axiosInstance
+  //     .post(`/deactivateAdvocateById/${id}`)
+  //     .then((res) => {
+  //       if (res.data.status === 200) {
+  //         const updatedData = data.map((advocate) => {
+  //           if (advocate._id === id) {
+  //             advocate.isActive = false;
+  //           }
+  //           return advocate;
+  //         });
+  //         setData(updatedData);
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error!", error);
+  //     });
+  // };
 
   useEffect(() => {
-    axiosInstance
-      .post("/viewAdvocates")
-      .then((res) => {
-        if (res.data.status === 200) {
-          console.log(res);
-          setData(res.data.data || []);
-        } else {
-          setData([]);
-        }
-      })
-      .catch((error) => {
-        console.error("Error!", error);
-      });
+    const fetchdata = async () => {
+      try {
+          const result = await viewCount('viewAdvocateReqs');
+
+          if (result.success) {
+              console.log(result);
+              if(result.user.length>0)
+              setData(result.user);
+            else
+            setData([])
+          } else {
+              console.error('Village Office View Error :', result);
+              toast.error(result.message);
+          }
+      } catch (error) {
+          console.error('Unexpected error:', error);
+          toast.error('An unexpected error occurred during login');
+      }
+  };
+  fetchdata();
   }, []);
 
   return (
     <div className="main-div">
       <Link to="/adminviewadvocaterequest">View Advocate request</Link>
 
-      {data.length !== 0 ? (
+      {data.length >0 ? (
         <div className="table-container table-striped">
           <table className="table-change container-fluid">
             <thead>
@@ -104,14 +111,14 @@ function ViewAllAdvocates() {
                       {advocate.isActive ? (
                         <button
                           className="btn btn-outline-danger button-size1"
-                          onClick={() => handleDeactivate(advocate._id)}
+                          // onClick={() => handleDeactivate(advocate._id)}
                         >
                           Deactivate
                         </button>
                       ) : (
                         <button
                           className="btn btn-outline-success button-size1"
-                          onClick={() => handleActivate(advocate._id)}
+                          // onClick={() => handleActivate(advocate._id)}
                         >
                           Activate
                         </button>

@@ -10,7 +10,7 @@ export const login = async (data, api) => {
         const response = await axios.post(`${API_BASE_URL}/${api}`, data);
         console.log(response);
 
-        if (response.data.status === 200) {
+        if (response.status === 200) {
             const { result } = response.data;
             return { success: true, user: response.data.data };
         } else {
@@ -68,7 +68,7 @@ export const registerWithFile = async (data, api) => {
         });
         console.log(response);
 
-        if (response.data.status === 200) {
+        if (response.status === 200) {
             const { result } = response.data;
             return { success: true, user: response.data.data };
         } else {
@@ -95,7 +95,7 @@ export const forgotPassword = async (data, api) => {
         const response = await axios.post(`${API_BASE_URL}/${api}`, data);
         console.log(response);
 
-        if (response.data.status === 200) {
+        if (response.status === 200) {
             const { result } = response.data;
             return { success: true, user: response.data.data };
         } else {
@@ -122,7 +122,7 @@ export const resetPassword = async (data, api, id) => {
         const response = await axios.post(`${API_BASE_URL}/${api}/${id}`, data);
         console.log(response);
 
-        if (response.data.status === 200) {
+        if (response.status === 200) {
             const { result } = response.data;
             return { success: true, user: response.data.data };
         } else {
@@ -149,7 +149,7 @@ export const ViewById = async (api, id) => {
         const response = await axios.post(`${API_BASE_URL}/${api}/${id}`);
         console.log(response);
 
-        if (response.data.status === 200) {
+        if (response.status === 200) {
             const { result } = response.data;
             return { success: true, user: response.data.data };
         } else {
@@ -182,7 +182,7 @@ export const editByIdwithFile = async (api, id,data) => {
             });
         console.log(response);
 
-        if (response.data.status === 200) {
+        if (response.status === 200) {
             const { result } = response.data;
             return { success: true, user: response.data.data };
         } else {
