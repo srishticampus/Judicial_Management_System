@@ -7,72 +7,75 @@ import axiosInstance from "../../Constants/BaseUrl";
 import { Link, useNavigate } from "react-router-dom";
 import noReqFound from "../../../Assets/noReqFound.json";
 import Lottie from "lottie-react";
-
-function ApproveRejectAdvocate() {
+import { toast } from "react-toastify";
+import { approveById, viewCount } from "../../Services/AdminService";
+function AdminViewAdvReqs() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (localStorage.getItem("adminId") == null) {
+    if (localStorage.getItem("admin") == null) {
       navigate("/");
     }
   }, [navigate]);
 
   const [data, setData] = useState([]);
 
-  const handleApprove = (id) => {
-    axiosInstance
-      .post(`/approveAdvocateById/${id}`)
-      .then((res) => {
-        if (res.data.status === 200) {
-          const updatedData = data.map((advocate) => {
-            if (advocate._id === id) {
-              return { ...advocate, adminApproved: true };
-            }
-            return advocate;
-          });
-          setData(updatedData);
-          window.location.reload()
+  const handleApprove = async(id) => {
+    try {
+      const result = await approveById('approveAdvocateById',id);
 
-        }
-      })
-      .catch((error) => {
-        console.error("Error!", error);
-      });
+      if (result.success) {
+          console.log(result);
+         fetchdata()
+      } else {
+          console.error('View Error :', result);
+          toast.error(result.message);
+      }
+  } catch (error) {
+      console.error('Unexpected error:', error);
+      toast.error('An unexpected error occurred during login');
+  }
+    
   };
 
-  const handleReject = (id) => {
-    axiosInstance
-      .post(`/rejectAdvocateById/${id}`)
-      .then((res) => {
-        if (res.data.status === 200) {
-          const updatedData = data.map((advocate) => {
-            if (advocate._id === id) {
-              return { ...advocate, adminApproved: false };
-            }
-            return advocate;
-          });
-          setData(updatedData);
-          window.location.reload()
-        }
-      })
-      .catch((error) => {
-        console.error("Error!", error);
-      });
-  };
+  const handleReject =async (id) => {
+    try {
+      const result = await approveById('rejectAdvocateById',id);
 
-  useEffect(() => {
-    axiosInstance
-      .post("/viewAdvocateReqs")
-      .then((res) => {
-        if (res.data.status === 200) {
-          setData(res.data.data || []);
+      if (result.success) {
+          console.log(result);
+        fetchdata()
+      } else {
+          console.error(' View Error :', result);
+          toast.error(result.message);
+      }
+  } catch (error) {
+      console.error('Unexpected error:', error);
+      toast.error('An unexpected error occurred during login');
+  }
+  };
+  const fetchdata = async () => {
+    try {
+        const result = await viewCount('viewAdvocateReqs');
+
+        if (result.success) {
+            console.log(result);
+            if(result.user.length>0)
+            setData(result.user);
+          else
+          setData([])
         } else {
-          setData([]);
+            console.error('Village Office View Error :', result);
+            toast.error(result.message);
         }
-      })
-      .catch((error) => {
-        console.error("Error!", error);
-      });
+    } catch (error) {
+        console.error('Unexpected error:', error);
+        toast.error('An unexpected error occurred during login');
+    }
+};
+  useEffect(() => {
+  
+  fetchdata();
   }, []);
 
   return (
@@ -80,17 +83,17 @@ function ApproveRejectAdvocate() {
       {data.length !== 0 ? (
         <div className="table-container table-striped">
           <table className="table-change container-fluid">
-            <thead>
+            <thead className="admin-tab-head">
               <tr>
-                <th className="table-header">Bar council Enrolment No</th>
-                <th className="table-header">Advocate Name</th>
-                <th className="table-header">Specialization areas</th>
-                <th className="table-header">Bar Council Area</th>
-                <th className="table-header">Educational qualification</th>
+                <th className="table-header admin-tab-head-text">BC No</th>
+                <th className="table-header admin-tab-head-text"> Name</th>
+                <th className="table-header">Specialization</th>
+                <th className="table-header">E-Mail</th>
+                <th className="table-header">Contact</th>
                 <th className="table-header">Years of Experience</th>
-                <th className="table-header">View full Details</th>
-                <th className="table-header">Accept</th>
-                <th className="table-header">Reject</th>
+                <th className="table-header">View More</th>
+                <th className="table-header">Approve</th>
+                <th className="table-header">Remove</th>
               </tr>
             </thead>
             <tbody>
@@ -100,8 +103,8 @@ function ApproveRejectAdvocate() {
                     <td className="table-data">{advocate.bcNo}</td>
                     <td className="table-data">{advocate.name}</td>
                     <td className="table-data">{advocate.specialization}</td>
-                    <td className="table-data">{advocate.bcState}</td>
-                    <td className="table-data">{advocate.qualification}</td>
+                    <td className="table-data">{advocate.email}</td>
+                    <td className="table-data">{advocate.contact}</td>
                     <td className="table-data">{advocate.experience} years</td>
                     <td className="table-data">
                       <Link to={`/adminviewrequest/${advocate._id}`}>
@@ -146,4 +149,4 @@ function ApproveRejectAdvocate() {
   );
 }
 
-export default ApproveRejectAdvocate;
+export default AdminViewAdvReqs;

@@ -81,7 +81,8 @@ const viewUsersForAdminAprvl = (req, res) => {
             } else {
                 res.json({
                     status: 200,
-                    msg: "No Data obtained"
+                    msg: "No Data obtained",
+                    data:[]
                 });
             }
         })
@@ -169,8 +170,8 @@ const viewUserById = (req, res) => {
 };
 
 // View all active Users
-const viewActiveUsers = (req, res) => {
-    User.find({ isActive: true })
+const viewAllUsers = (req, res) => {
+    User.find({ adminApproved: true })
         .exec()
         .then(data => {
             res.json({
@@ -407,7 +408,7 @@ module.exports = {
     viewUsersForAdminAprvl,
     editUserById,
     deleteUserById,
-    viewActiveUsers,
+    viewAllUsers,
     resetPassword,
     forgotPassword,
     activateUserById,

@@ -85,3 +85,14 @@
       }
       
     }
+
+    .admin-tab-head{
+      background-color: #AA9166;
+      font-weight: bold;
+      font-size: 50px;
+      color:white;
+    }
+    .admin-tab-head-text{
+      font-weight: bold;
+      font-size: 50px;
+    }

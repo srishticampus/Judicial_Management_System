@@ -3,98 +3,81 @@
 import React, { useEffect, useState } from "react";
 import img from "../../../Assets/Vecto(2).png";
 import axiosInstance from "../../Constants/BaseUrl";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import noData from "../../../Assets/noDataFound.json";
 import Lottie from "lottie-react";
 import '../../../Styles/AdminViewUsers.css'
-import { toast, ToastContainer } from "react-toastify";
-
+import { toast } from "react-toastify";
+import { approveById, viewCount } from "../../Services/AdminService";
 function AdminViewUserReqs() {
 
-
-    const [data, setData] = useState([]);
-
+    const navigate = useNavigate();
 
     useEffect(() => {
-        axiosInstance
-            .post("/viewUsersForAdmin")
-            .then((res) => {
-                if (res.status === 200) {
-                    console.log(res);
-                    setData(res.data.data || []);
-                } else {
-                    setData([]);
-                }
-            })
-            .catch((error) => {
-                console.error("Error!", error);
-            });
-    }, []);
-
-    // const handleActivate = (id) => {
-    //     axiosInstance
-    //       .post(`/approveUserById/${id}`)
-    //       .then((res) => {
-    //         console.log(res);
-
-    //         if (res.status === 200) {
-    //             console.log(res);
-                
-    //             toast.success('User Approved Successfully')
-    //           const updatedData = data.map((user) => {
-    //             if (user._id === id) {
-    //                 user.isActive = true;
-    //             }
-    //             return user;
-    //           });
-    //           setData(updatedData);
-    //         }
-    //       })
-    //       .catch((error) => {
-    //         console.error("Error!", error);
-    //       });
-    //   };
-    
-
-    const handleActivate = (id) => {
-        axiosInstance
-          .post(`/approveUserById/${id}`)
-          .then((res) => {
-            if (res.status === 200) {
-                toast.success('User Approved Successfully'); // Toast after success
-                const updatedData = data.map((user) => {
-                  if (user._id === id) {
-                      user.isActive = true;
-                  }
-                  return user;
-                });
-                setData(updatedData);
-            }
-          })
-          .catch((error) => {
-            console.error("Error!", error);
-            toast.error("Error approving user."); // Show toast on error
-          });
+      if (localStorage.getItem("admin") == null) {
+        navigate("/");
+      }
+    }, [navigate]);
+  
+    const [data, setData] = useState([]);
+  
+    const handleApprove = async(id) => {
+      try {
+        const result = await approveById('approveUserById',id);
+  
+        if (result.success) {
+            console.log(result);
+           fetchdata()
+        } else {
+            console.error('View Error :', result);
+            toast.error(result.message);
+        }
+    } catch (error) {
+        console.error('Unexpected error:', error);
+        toast.error('An unexpected error occurred view Users');
+    }
+      
     };
+  
+    const handleReject =async (id) => {
+      try {
+        const result = await approveById('rejectUserById',id);
+  
+        if (result.success) {
+            console.log(result);
+          fetchdata()
+        } else {
+            console.error(' View Error :', result);
+            toast.error(result.message);
+        }
+    } catch (error) {
+        console.error('Unexpected error:', error);
+        toast.error('An unexpected error occurred during login');
+    }
+    };
+    const fetchdata = async () => {
+      try {
+          const result = await viewCount('viewUsersForAdmin');
+  
+          if (result.success) {
+              console.log(result);
+              if(result.user.length>0)
+              setData(result.user);
+            else
+            setData([])
+          } else {
+              console.error('Village Office View Error :', result);
+              toast.error(result.message);
+          }
+      } catch (error) {
+          console.error('Unexpected error:', error);
+          toast.error('An unexpected error occurred during login');
+      }
+  };
+    useEffect(() => {
     
-      const handleDeactivate = (id) => {
-        axiosInstance
-          .post(`/rejectUserById/${id}`)
-          .then((res) => {
-            if (res.data.status === 200) {
-              const updatedData = data.map((junioradvocate) => {
-                if (junioradvocate._id === id) {
-                    junioradvocate.isActive = false;
-                }
-                return junioradvocate;
-              });
-              setData(updatedData);
-            }
-          })
-          .catch((error) => {
-            console.error("Error!", error);
-          });
-      };
+    fetchdata();
+    }, []);
     return (
         <div className="main-div">
            
@@ -137,13 +120,13 @@ function AdminViewUserReqs() {
                        
                             <button
                               className="btn btn-outline-success button-size p-1"
-                              onClick={() => handleActivate(user._id)}
+                              onClick={() => handleApprove(user._id)}
                             >
                              Approve
                             </button>
                             <button
                               className="btn btn-outline-danger button-size p-1  ms-3"
-                              onClick={() => handleDeactivate(user._id)}
+                              onClick={() => handleReject(user._id)}
                             >
                               Delete 
                             </button>

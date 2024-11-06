@@ -76,7 +76,7 @@ function LandingNavbar() {
               <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
              
     <li>
-      <Link to="/user-signup" className="dropdown-item">
+      <Link to="/user-reg" className="dropdown-item">
       Petitioner
       </Link>
     </li>

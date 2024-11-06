@@ -5,64 +5,68 @@ import { Link } from "react-router-dom";
 import noData from "../../../Assets/noDataFound.json";
 import Lottie from "lottie-react";
 import '../../../Styles/AdminViewUsers.css'
+import { toast } from "react-toastify";
+import { approveById, viewCount } from "../../Services/AdminService";
 function AdminViewUsers() {
 
-    const [data, setData] = useState([]);
+    const [data,setData]=useState([])
+  const handleActivate = async(id) => {
+    try {
+      const result = await approveById('activateUserById',id);
 
+      if (result.success) {
+          console.log(result);
+         fetchdata()
+      } else {
+          console.error('View Error :', result);
+          toast.error(result.message);
+      }
+  } catch (error) {
+      console.error('Unexpected error:', error);
+      toast.error('An unexpected error occurred during login');
+  }
+    
+  };
 
-  useEffect(() => {
-    axiosInstance
-      .post("/viewActiveUsers")
-      .then((res) => {
-        if (res.data.status === 200) {
-          console.log(res);
-          setData(res.data.data || []);
+  const handleDeactivate =async (id) => {
+    try {
+      const result = await approveById('deActivateUserById',id);
+
+      if (result.success) {
+          console.log(result);
+        fetchdata()
+      } else {
+          console.error(' View Error :', result);
+          toast.error(result.message);
+      }
+  } catch (error) {
+      console.error('Unexpected error:', error);
+      toast.error('An unexpected error occurred during login');
+  }
+  };
+  const fetchdata = async () => {
+    try {
+        const result = await viewCount('viewAllUsers');
+
+        if (result.success) {
+            console.log(result);
+            if(result.user.length>0)
+            setData(result.user);
+          else
+          setData([])
         } else {
-          setData([]);
+            console.error('Village Office View Error :', result);
+            toast.error(result.message);
         }
-      })
-      .catch((error) => {
-        console.error("Error!", error);
-      });
+    } catch (error) {
+        console.error('Unexpected error:', error);
+        toast.error('An unexpected error occurred during login');
+    }
+};
+  useEffect(() => {
+  
+  fetchdata();
   }, []);
-  const handleActivate = (id) => {
-    axiosInstance
-      .post(`/activateUserById/${id}`)
-      .then((res) => {
-        if (res.data.status === 200) {
-          const updatedData = data.map((user) => {
-            if (user._id === id) {
-                user.isActive = true;
-            }
-            return user;
-          });
-          setData(updatedData);
-        }
-      })
-      .catch((error) => {
-        console.error("Error!", error);
-      });
-  };
-
-  const handleDeactivate = (id) => {
-    axiosInstance
-      .post(`/deActivateUserById/${id}`)
-      .then((res) => {
-        if (res.data.status === 200) {
-          const updatedData = data.map((junioradvocate) => {
-            if (junioradvocate._id === id) {
-                junioradvocate.isActive = false;
-            }
-            return junioradvocate;
-          });
-          setData(updatedData);
-        }
-      })
-      .catch((error) => {
-        console.error("Error!", error);
-      });
-  };
-
   return (
     <div className="main-div">
 <h3 className="admin-user-req-link"><Link to='/admin-userreqs' className="admin-user-req-linkh3" >New User Requests</Link></h3>

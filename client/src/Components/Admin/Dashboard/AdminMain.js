@@ -4,7 +4,7 @@ import AdminSidebar from "./AdminSidebar";
 import AdminDashboard from "./AdminDashboard";
 import AdminLogin from "../Login/AdminLogin";
 import ViewAllAdvocates from "./ViewAllAdvocates";
-import ApproveRejectAdvocate from "./ApproveRejectAdvocate";
+import ApproveRejectAdvocate from "./AdminViewAdvReqs";
 import ViewProfile_AR from "./ViewProfile_AR";
 import "../../../Styles/AdminMain.css";
 
@@ -17,6 +17,7 @@ import AdminViewCaseStatus from "./AdminViewCaseStatus";
 import AdminViewEvidences from "./AdminViewEvidences";
 import AdminViewPayment from "./AdminViewPayment";
 import AdminViewUserReqs from "./AdminViewUserReqs";
+import AdminViewAdvReqs from "./AdminViewAdvReqs";
 
 function AdminMain({ data }) {
   const navigate = useNavigate(); 
@@ -39,13 +40,12 @@ function AdminMain({ data }) {
         <div className=" col-lg-9 col-md-6 col-sm-12 adminmain-content">
           {data === "admindashboard" ? (
             <AdminDashboard />
-          ) : data === "adminviewalladvocates" ? (
-            <ViewAllAdvocates />
-          ) : data === "approvereject" ? (
-            <ApproveRejectAdvocate />
+          
+          ) : data === "admin-adv-reqs" ? (
+            <AdminViewAdvReqs />
           ) : data === "adminviewrequest" ? (
             <ViewProfile_AR view="request" />
-          ) : data === "adminviewsingleadvocate" ? (
+          ) : data === "adminviewrequest" ? (
             <ViewProfile_AR view="view" />
           ) : data === "adminviewalladvocates" ? (
             <ViewAllAdvocates />
@@ -57,7 +57,7 @@ function AdminMain({ data }) {
             <AdminViewComplaints />
           ) : data === "adminviewallusers" ? (
             <AdminViewUsers />
-          ) : data === "singleUser" ? (
+          ) : data === "admin-view-single-user" ? (
             <AdminViewSingleUsers />
           ) : data === "viewCases" ? (
             <AdminViewAllCases />
