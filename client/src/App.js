@@ -28,6 +28,7 @@ import AdvcateReg from './Components/Advocates/AdvocateReg';
 import AdvocateLogin from './Components/Advocates/AdvocateLogin';
 import AdvocateHome from './Components/Advocates/AdvocateHome';
 import AdvocateNavbar from './Components/Advocates/AdvocateNavbar';
+import ViewProfile_AR from './Components/Admin/Dashboard/ViewProfile_AR';
 
 function App() {
   return (
@@ -56,6 +57,9 @@ function App() {
             <Route path="/admin-viewallusers" element={[<AdminNav />, <AdminMain data="adminviewallusers" />, <AdminFooter />]} />
             <Route path="/admin-userreqs" element={[<AdminNav />, <AdminMain data="admin-userreqs" />, <AdminFooter />]} />
             <Route path="/admin-viewalladvocates" element={[<AdminNav />, <AdminMain data="adminviewalladvocates" />, <AdminFooter />]} />
+            <Route path="/admin-adv-reqs" element={[<AdminNav />, <AdminMain data="admin-adv-reqs" />, <AdminFooter />]} />
+            <Route path="/adminviewrequest/:id" element={[<AdminNav />, <AdminMain data="adminviewrequest" />, <AdminFooter />]} />
+            <Route path="/admin_view_single_user/:id" element={[<AdminNav />, <AdminMain data="admin-view-single-user" />, <AdminFooter />]} />
 
 
 

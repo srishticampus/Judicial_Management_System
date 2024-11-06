@@ -120,7 +120,8 @@ const viewAdvocates = (req, res) => {
             } else {
                 res.json({
                     status: 200,
-                    msg: "No Data obtained"
+                    msg: "No Data obtained",
+                    data:[]
                 });
             }
         })
@@ -160,6 +161,7 @@ const viewAdvocatesBySpecializn = (req, res) => {
             });
         });
 };
+
 // View all advocate Reqs
 const viewAdvocateReqs = (req, res) => {
     Advocate.find({adminApproved:false})

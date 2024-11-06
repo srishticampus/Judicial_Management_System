@@ -54,4 +54,29 @@ import axios from 'axios';
         }
     };
 
- 
+    export const approveById = async (api,id) => {
+        try {
+    
+    
+            const response = await axios.post(`${API_BASE_URL}/${api}/${id}`);
+            console.log(response);
+    
+            if (response.data.status === 200) {
+                const { result } = response.data;
+                return { success: true, user:  response.data.data };
+            } else {
+                return { success: false, message: response.data.msg };
+            }
+        } catch (error) {
+            if (error.response && error.response.data) {
+                return {
+                    success: false,
+                    message: error.response.data.msg || 'View User failed',
+                };
+            }
+            return {
+                success: false,
+                message: 'An unexpected error occurred',
+            };
+        }
+    };

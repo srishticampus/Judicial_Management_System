@@ -5,25 +5,39 @@ import casesimg from "../../../Assets/Vector (2).png";
 import adimg from "../../../Assets/image 19.png";
 import complaintimg from "../../../Assets/codiconbriefcase.png";
 import axiosInstance from "../../Constants/BaseUrl";
-
+import { viewCount } from "../../Services/AdminService";
+import { toast } from "react-toastify";
 function AdminDashboard() {
   const [userCount, setUserCount] = useState(0);
   const [advocateCount, setAdvocateCount] = useState(0);
   const [cases, setCases] = useState(0);
   const [complaints, setComplaints] = useState(0);
 
-  useEffect(() => {
-    axiosInstance
-      .post("/viewActiveUsers")
-      .then((response) => {
-        console.log("Response from backend:", response.data);
-        if (response.status === 200 && response.data.data) {
-          setUserCount(response.data.data.length);
-        }
-      })
-      .catch((error) => {
-        console.error("There was an error fetching the user data!", error);
-      });
+ 
+   
+    const fetchdata = async () => {
+      try {
+          const result = await viewCount('viewAdvocates');
+  
+          if (result.success) {
+              console.log(result);
+              if(result.user.length>0)
+                setAdvocateCount(result.user);
+            else
+            setAdvocateCount([])
+          } else {
+              console.error('View Error :', result);
+              toast.error(result.message);
+          }
+      } catch (error) {
+          console.error('Unexpected error:', error);
+          toast.error('An unexpected error occurred ');
+      }
+  };
+    useEffect(() => {
+    
+    fetchdata();
+    }, []);
 //     axiosInstance
 //       .post("/viewAdvocates")
 //       .then((response) => {
@@ -57,7 +71,7 @@ function AdminDashboard() {
 //       .catch((error) => {
 //         console.error("There was an error fetching the user data!", error);
 //       });
-  }, []);
+
 
   return (
  

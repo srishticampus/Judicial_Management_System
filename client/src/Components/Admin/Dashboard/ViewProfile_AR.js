@@ -3,8 +3,10 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import axiosInstance from "../../Constants/BaseUrl";
 import "../../../Styles/ViewProfile_AR.css";
 import img from "../../../Assets/image 21.png";
-import { imageUrl } from '../../Constants/Image_Url' 
-
+import {IMG_BASE_URL} from '../../Services/BaseURL' 
+import { toast } from "react-toastify";
+import { approveById, viewCount } from "../../Services/AdminService";
+import { ViewById } from "../../Services/CommonServices";
 function ViewProfile_AR({ view }) {
   const [advocate, setAdvocate] = useState(null);
   const [data, setData] = useState([]);
@@ -13,93 +15,103 @@ function ViewProfile_AR({ view }) {
   const { id } = useParams();
 
   useEffect(() => {
-    if (localStorage.getItem("adminId") == null) {
+    if (localStorage.getItem("admin") == null) {
       navigate("/");
     }
   }, [navigate]);
 
+  const handleApprove = async(id) => {
+    try {
+      const result = await approveById('approveAdvocateById',id);
+
+      if (result.success) {
+          console.log(result);
+         fetchdata()
+      } else {
+          console.error('View Error :', result);
+          toast.error(result.message);
+      }
+  } catch (error) {
+      console.error('Unexpected error:', error);
+      toast.error('An unexpected error occurred during login');
+  }
+    
+  };
+
+  const handleReject =async (id) => {
+    try {
+      const result = await approveById('rejectAdvocateById',id);
+
+      if (result.success) {
+          console.log(result);
+      
+      } else {
+          console.error(' View Error :', result);
+          toast.error(result.message);
+      }
+  } catch (error) {
+      console.error('Unexpected error:', error);
+      toast.error('An unexpected error occurred during login');
+  }
+  };
+  const fetchdata = async () => {
+    try {
+        const result = await ViewById('viewAdvocateById',id);
+
+        if (result.success) {
+            console.log(result);
+            if(result.user)
+              setAdvocate(result.user);
+          else
+          setAdvocate({})
+        } else {
+            console.error('Village Office View Error :', result);
+            toast.error(result.message);
+        }
+    } catch (error) {
+        console.error('Unexpected error:', error);
+        toast.error('An unexpected error occurred during login');
+    }
+};
   useEffect(() => {
-    axiosInstance
-      .post(`/viewAdvocateById/${id}`)
-      .then((response) => {
-        setAdvocate(response.data.data);
-      })
-      .catch((error) => {
-        console.error("There was an error fetching the advocate details!", error);
-      });
+  
+  fetchdata();
   }, [id]);
 
-  const handleApprove = (id) => {
-    axiosInstance
-      .post(`/approveAdvocateById/${id}`)
-      .then((res) => {
-        if (res.data.status === 200) {
-          const updatedData = data.map((advocate) => {
-            if (advocate._id === id) {
-              advocate.adminApproved = true;
-            }
-            return advocate;
-          });
-          setData(updatedData);
-          navigate("/admin-viewalladvocates");
-        }
-      })
-      .catch((error) => {
-        console.error("Error!", error);
-      });
+  const handleActivate = async(id) => {
+    try {
+      const result = await approveById('activateAdvocateById',id);
+
+      if (result.success) {
+          console.log(result);
+         fetchdata()
+      } else {
+          console.error('View Error :', result);
+          toast.error(result.message);
+      }
+  } catch (error) {
+      console.error('Unexpected error:', error);
+      toast.error('An unexpected error occurred during login');
+  }
+    
   };
 
-  const handleReject = (id) => {
-    axiosInstance
-      .post(`/rejectAdvocateById/${id}`)
-      .then((res) => {
-        if (res.data.status === 200) {
-          const updatedData = data.map((advocate) => {
-            if (advocate._id === id) {
-              advocate.adminApproved = false;
-            }
-            return advocate;
-          });
-          setData(updatedData);
-        }
-      })
-      .catch((error) => {
-        console.error("Error!", error);
-      });
-  };
+  const handleDeactivate =async (id) => {
+    try {
+      const result = await approveById('deactivateAdvocateById',id);
 
-  const handleActivate = (id) => {
-    axiosInstance
-      .post(`/activateAdvocateById/${id}`)
-      .then((res) => {
-        if (res.data.status === 200) {
-          setAdvocate((prevAdvocate) => ({
-            ...prevAdvocate,
-            isActive: true,
-          }));
-        }
-      })
-      .catch((error) => {
-        console.error("Error!", error);
-      });
+      if (result.success) {
+          console.log(result);
+        fetchdata()
+      } else {
+          console.error(' View Error :', result);
+          toast.error(result.message);
+      }
+  } catch (error) {
+      console.error('Unexpected error:', error);
+      toast.error('An unexpected error occurred during login');
+  }
   };
-
-  const handleDeactivate = (id) => {
-    axiosInstance
-      .post(`/deactivateAdvocateById/${id}`)
-      .then((res) => {
-        if (res.data.status === 200) {
-          setAdvocate((prevAdvocate) => ({
-            ...prevAdvocate,
-            isActive: false,
-          }));
-        }
-      })
-      .catch((error) => {
-        console.error("Error!", error);
-      });
-  };
-
   const toggleModal = () => setShowModal(!showModal);
 
   if (!advocate) {
@@ -107,15 +119,15 @@ function ViewProfile_AR({ view }) {
   }
 
   return (
-    <div className="container-fluid mt-4">
-      <div className="row justify-content-center">
+    <div className="container-fluid mt-4 ms-3">
+      <div className="row justify-content-center mt-5">
         <div className="admin_view_advocate_img col-lg-4 col-md-6 col-sm-12 text-center">
-          <img src={`${imageUrl}/${advocate.profilePic.filename}`} className="img-fluid rounded" alt="Advocate" />
+          <img src={`${IMG_BASE_URL}/${advocate.profilePic.filename}`} className="img-fluid rounded" alt="Advocate" />
           <br />
           <label className="advocate-name d-block mt-3">{advocate.name}</label>
-          <label className="practice-area d-block">Practice Area</label>
+          <label className="practice-area d-block">{advocate.specialization}</label>
           <label className="experience-label d-block">
-            {advocate.experience} Years of Experience in Various Cases
+            {advocate.experience} Years of Experience 
           </label>
           <br />
           <Link className="link-label" to="#!" onClick={toggleModal}>
@@ -137,25 +149,25 @@ function ViewProfile_AR({ view }) {
                 </tr>
                 <tr>
                   <td className="left-alignn">
-                    <label className="sub-label">Date of Enrollment </label>
+                    <label className="sub-label">E-Mail </label>
                   </td>
                   <td className="left-alignn"> : </td>
                   <td className="left-alignn">
-                    <label className="sub-label">{advocate.dateOfEnrollment}</label>
+                    <label className="sub-label">{advocate.email}</label>
                   </td>
                 </tr>
                 <tr>
                   <td className="left-alignn">
-                    <label className="sub-label">State Bar Council </label>
+                    <label className="sub-label">Contact Number </label>
                   </td>
                   <td className="left-alignn"> : </td>
                   <td className="left-alignn">
-                    <label className="sub-label">{advocate.bcState}</label>
+                    <label className="sub-label">{advocate.contact}</label>
                   </td>
                 </tr>
                 <tr>
                   <td className="left-alignn">
-                    <label className="sub-label">Specialization Areas </label>
+                    <label className="sub-label">Specialization Area </label>
                   </td>
                   <td className="left-alignn"> : </td>
                   <td className="left-alignn">
@@ -173,11 +185,11 @@ function ViewProfile_AR({ view }) {
                 </tr>
                 <tr>
                   <td className="left-alignn">
-                    <label className="sub-label">Educational Qualification </label>
+                    <label className="sub-label">Date Of Birth</label>
                   </td>
                   <td className="left-alignn"> : </td>
                   <td className="left-alignn">
-                    <label className="sub-label">{advocate.qualification}</label>
+                    <label className="sub-label">{advocate.dob.slice(0,10)}</label>
                   </td>
                 </tr>
                  
@@ -239,7 +251,7 @@ function ViewProfile_AR({ view }) {
               </button>
             </div>
             <div className="modal-body">
-              <img src={`${imageUrl}/${advocate.idProof.filename}`} className="img-fluid" alt="ID Proof" />
+              <img src={`${IMG_BASE_URL}/${advocate.idProof.filename}`} className="img-fluid" alt="ID Proof" />
             </div>
             <div className="modal-footer">
               <button type="button" className="btn btn-secondary" onClick={toggleModal}>Close</button>

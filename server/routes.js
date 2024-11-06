@@ -15,7 +15,7 @@ router.post('/forgotPasswordUser', User.forgotPassword);
 router.post('/resetPasswordUser/:id', User.resetPassword);
 router.post('/viewUserById/:id', User.viewUserById);
 router.post('/viewUsersForAdmin', User.viewUsersForAdminAprvl);
-router.post('/viewActiveUsers', User.viewActiveUsers);
+router.post('/viewAllUsers', User.viewAllUsers);
 router.post('/deActivateUserById/:id', User.deActivateUserById);
 router.post('/rejectUserById/:id', User.rejectUserById);
 router.post('/approveUserById/:id', User.approveUserById);
