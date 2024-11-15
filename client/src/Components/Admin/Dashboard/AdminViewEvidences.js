@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import axiosInstance from '../../Constants/BaseUrl';
 import { Modal, Button } from 'react-bootstrap'; 
-import { imageUrl } from '../../Constants/Image_Url';
 function AdminViewEvidences() {
 
     const [data, setData] = useState([]);
@@ -27,7 +25,7 @@ function AdminViewEvidences() {
     // }, [id]);
   
     const handleViewClick = (filename) => {
-      setFileUrl(`${imageUrl}/${filename}`);
+      // setFileUrl(`${imageUrl}/${filename}`);
       setShowModal(true);
     };
   
@@ -77,7 +75,7 @@ function AdminViewEvidences() {
         <Modal.Title>File Viewer</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        {fileUrl && (
+        {/* {fileUrl && (
           <>
             {fileUrl.endsWith('.pdf') ? (
               <iframe src={fileUrl} width="100%" height="500px" title="PDF Viewer" />
@@ -85,7 +83,7 @@ function AdminViewEvidences() {
               <img src={fileUrl} alt="Evidence" className="img-fluid" />
             )}
           </>
-        )}
+        )} */}
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleCloseModal}>

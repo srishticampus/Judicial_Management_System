@@ -4,8 +4,7 @@ import "../../Styles/UserReg.css";
 import img from '../../Assets/clientReg.png';
 import { toast } from "react-toastify";
 import 'remixicon/fonts/remixicon.css';
-import axiosInstance from "../Constants/BaseUrl";
-import axiosMultipartInstance from "../Constants/FormDataUrl";
+
 import { registerWithFile } from "../Services/CommonServices";
 
 function UserRegistration() {

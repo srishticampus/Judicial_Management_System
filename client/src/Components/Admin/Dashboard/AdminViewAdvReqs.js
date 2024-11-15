@@ -3,7 +3,6 @@ import "../../../Styles/ViewAllAdvocates.css";
 import img from "../../../Assets/Vecto(2).png";
 import img1 from "../../../Assets/Vectorsymbol.png";
 import img2 from "../../../Assets/raphael_cross.png";
-import axiosInstance from "../../Constants/BaseUrl";
 import { Link, useNavigate } from "react-router-dom";
 import noReqFound from "../../../Assets/noReqFound.json";
 import Lottie from "lottie-react";

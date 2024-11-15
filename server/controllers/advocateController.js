@@ -133,6 +133,32 @@ const viewAdvocates = (req, res) => {
             });
         });
 };
+const viewActiveAdvocates = (req, res) => {
+    Advocate.find({isActive:true})
+        .exec()
+        .then(data => {
+            if (data.length > 0) {
+                res.json({
+                    status: 200,
+                    msg: "Data obtained successfully",
+                    data: data
+                });
+            } else {
+                res.json({
+                    status: 200,
+                    msg: "No Data obtained",
+                    data:[]
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).json({
+                status: 500,
+                msg: "Data not obtained",
+                Error: err
+            });
+        });
+};
 
 
 // View all advocates
@@ -340,9 +366,13 @@ console.log("profilePic",req.body.filename);
 
 // View advocate by ID
 const viewAdvocateById = (req, res) => {
+    console.log(req.params.id );
+    
     Advocate.findById({ _id: req.params.id })
         .exec()
         .then(data => {
+            console.log(data);
+            
             res.json({
                 status: 200,
                 msg: "Data obtained successfully",
@@ -350,6 +380,8 @@ const viewAdvocateById = (req, res) => {
             });
         })
         .catch(err => {
+            console.log(err);
+            
             res.status(500).json({
                 status: 500,
                 msg: "No Data obtained",
@@ -546,6 +578,7 @@ module.exports = {
     registerAdvocate,
     viewAdvocates,
     editAdvocateById,
+    viewActiveAdvocates,
     viewAdvocateById,
     deleteAdvocateById,
     forgotPassword,

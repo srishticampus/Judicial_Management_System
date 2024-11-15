@@ -53,7 +53,7 @@ function UserNavbar() {
               </Link>
               <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <Link to='/user_add_case' className="dropdown-item" >Add Cases</Link>
-                <Link to='/user_view_recent_cases' className="dropdown-item" >Recent Cases</Link>
+                <Link to='/user_view_case' className="dropdown-item" >Recent Cases</Link>
                 {/* <Link to={''}  className="dropdown-item" >Advocates</Link> */}
                 
               </div>

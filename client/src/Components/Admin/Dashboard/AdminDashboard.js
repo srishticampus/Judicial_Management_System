@@ -4,7 +4,7 @@ import userimg from "../../../Assets/Vector (1).png";
 import casesimg from "../../../Assets/Vector (2).png";
 import adimg from "../../../Assets/image 19.png";
 import complaintimg from "../../../Assets/codiconbriefcase.png";
-import axiosInstance from "../../Constants/BaseUrl";
+
 import { viewCount } from "../../Services/AdminService";
 import { toast } from "react-toastify";
 function AdminDashboard() {

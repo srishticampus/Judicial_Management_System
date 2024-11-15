@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import axiosInstance from "../../Constants/BaseUrl";
+
 import img from "../../../Assets/image 21.png";
 import {IMG_BASE_URL} from '../../Services/BaseURL' 
 import { toast } from "react-toastify";

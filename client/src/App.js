@@ -29,6 +29,13 @@ import AdvocateLogin from './Components/Advocates/AdvocateLogin';
 import AdvocateHome from './Components/Advocates/AdvocateHome';
 import AdvocateNavbar from './Components/Advocates/AdvocateNavbar';
 import ViewProfile_AR from './Components/Admin/Dashboard/ViewProfile_AR';
+import UserAddCases from './Components/User/UserAddCases';
+import UserViewRecentCases from './Components/User/UserViewRecentCases';
+import User_RequestAdvocate from './Components/User/User_RequestAdvocate';
+import User_BookAppoinment from './Components/User/User_BookAppoinment';
+import Advocate_ViewCaseRequest from './Components/Advocates/Advocate_ViewCaseRequest';
+import AdvocateViewCaseReq from './Components/Advocates/AdvocateViewCaseReq';
+import AdvocateEditProfile from './Components/Advocates/AdvocateEditProfile';
 
 function App() {
   return (
@@ -68,6 +75,10 @@ function App() {
             <Route path="/user-login" element={[<LandingNavbar />, <UserLogin />, <UserFooter />]} />
             <Route path="/user-home" element={[<UserNavbar />, <UserHome />, <UserFooter />]} />
             <Route path="/user_profile" element={[<UserNavbar />, <UserProfile />, <UserFooter />]} />
+            <Route path="/user_view_case" element={[<UserNavbar />, <UserViewRecentCases />, <UserFooter />]} />
+            <Route path="/user-request-advocate/:id" element={[<UserNavbar />,<User_RequestAdvocate/>,<UserFooter/>]} />
+            <Route path="/user_bookappoinment/:id/:cid" element={[<UserNavbar />,<User_BookAppoinment/>,<UserFooter/>]} />
+            <Route path="/user_add_case" element={[<UserNavbar />, <UserAddCases />, <UserFooter />]} />
 
 
 
@@ -75,6 +86,9 @@ function App() {
 <Route path="/att-signup" element={[<LandingNavbar />, <AdvcateReg />, <UserFooter />]} />
 <Route path="/advocate-login" element={[<LandingNavbar />, <AdvocateLogin />, <UserFooter />]} />
 <Route path="/advocate-home" element={[<AdvocateNavbar />, <AdvocateHome />, <UserFooter />]} />
+<Route path="/advocate_viewcasereq" element={[<AdvocateNavbar />, <Advocate_ViewCaseRequest/>, <UserFooter />]} />
+<Route path="/advocate_view_single_case_req/:id" element={[<AdvocateNavbar />, <AdvocateViewCaseReq />,<UserFooter />]} />
+<Route path="/advocate_edit_profile" element={[<AdvocateNavbar />, <AdvocateEditProfile />,<UserFooter />]} />
 
           </Routes>
         </div>

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import axiosInstance from '../../Constants/BaseUrl';
 import { useParams } from 'react-router-dom';
 
 
@@ -8,21 +7,21 @@ function AdminViewCaseStatus() {
     const [data, setData] = useState([]);
 const { id } = useParams();
 
-useEffect(() => {
-  axiosInstance
-    .post(`/getStatusByCaseId/${id}`)
-    .then((res) => {
-      console.log(res);
-      if (res.data.status === 200) {
-        setData(res.data.data || []);
-      } else {
-        setData([]);
-      }
-    })
-    .catch((error) => {
-      console.error("Error!", error);
-    });
-}, [id]);
+// useEffect(() => {
+//   axiosInstance
+//     .post(`/getStatusByCaseId/${id}`)
+//     .then((res) => {
+//       console.log(res);
+//       if (res.data.status === 200) {
+//         setData(res.data.data || []);
+//       } else {
+//         setData([]);
+//       }
+//     })
+//     .catch((error) => {
+//       console.error("Error!", error);
+//     });
+// }, [id]);
   return (
     <div className="adv_client_payment_status">
       <div className="container advocate_home_container2 pt-5 pb-5">

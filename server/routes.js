@@ -4,8 +4,8 @@ const router = express.Router();
 const Admin=require('./controllers/adminController')
 const User = require('./controllers/userController'); 
 const advocates = require('./controllers/advocateController'); 
-
-
+const cases=require('./controllers/caseController')
+const appointments=require('./controllers/appointmentController')
 
 // User routes
 
@@ -44,5 +44,27 @@ router.post('/activateAdvocateById/:id',advocates.activateAdvocateById)
 router.post('/deactivateAdvocateById/:id',advocates.deactivateAdvocateById)
 router.post('/viewAdvocatesBySpecializn',advocates.viewAdvocatesBySpecializn)
 router.post('/addRating/:id',advocates.addRating)
+router.post('/viewActiveAdvocates',advocates.viewActiveAdvocates)
+
+
+
+//case routes
+router.post('/createCase',cases.upload,cases.createCase)
+router.post('/getCaseType/:description',cases.getCaseType)
+router.post('/getCaseByUserId/:id',cases.getCaseByUserId)
+router.post('/getCaseById/:id',cases.getCaseById)
+router.post('/deleteCase/:id',cases.deleteCase)
+router.post('/getAllCases',cases.getAllCases)
+
+// Appointments
+router.post('/createAppointment',appointments.createAppointment)
+router.post('/getAppointmentReqsByUserId/:id',appointments.getAppointmentReqsByUserId)
+router.post('/getAppointmentReqsForAdv/:id',appointments.getAppointmentReqsForAdv)
+router.post('/acceptReqbyAdv/:id',appointments.acceptReqbyAdv)
+router.post('/rejectReqbyAdv/:id',appointments.rejectReqbyAdv)
+router.post('/getAppointmentReqsById/:id',appointments.getAppointmentReqsById)
+router.post('/getApprovedAppointmentsForAdv/:id',appointments.getApprovedAppointmentsForAdv)
+router.post('/getApprovedAppointmentsForAdv/:id',appointments.getApprovedAppointmentsForAdv)
+
 
 module.exports = router;
