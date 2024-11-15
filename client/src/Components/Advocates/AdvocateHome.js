@@ -194,7 +194,7 @@ const imageUrl=IMG_BASE_URL
                     </caption>
                   </table>
                   <div className="advocate_home_edit_btn text-center mt-3">
-                    <Link to={`/advocate_edit_profile/${id}`}>
+                    <Link to={`/advocate_edit_profile`}>
                       <button type="submit">Edit</button>
                     </Link>
                   </div>

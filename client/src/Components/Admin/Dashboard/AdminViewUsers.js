@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import img from "../../../Assets/Vecto(2).png";
-import axiosInstance from "../../Constants/BaseUrl";
 import { Link } from "react-router-dom";
 import noData from "../../../Assets/noDataFound.json";
 import Lottie from "lottie-react";

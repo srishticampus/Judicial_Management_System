@@ -41,7 +41,7 @@ function AdvocateNavbar() {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto"> {/* Use 'ml-auto' for Bootstrap 4 */}
               <li className="nav-item">
-                <Link className="nav-link" to="/advocate_home">
+                <Link className="nav-link" to="/advocate-home">
                   Home
                 </Link>
               </li>
