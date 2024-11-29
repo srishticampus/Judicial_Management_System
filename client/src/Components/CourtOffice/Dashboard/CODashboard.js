@@ -7,7 +7,7 @@ import complaintimg from "../../../Assets/codiconbriefcase.png";
 
 import { viewCount } from "../../Services/AdminService";
 import { toast } from "react-toastify";
-function AdminDashboard() {
+function CODashboard() {
   const [userCount, setUserCount] = useState(0);
   const [advocateCount, setAdvocateCount] = useState(0);
   const [cases, setCases] = useState(0);
@@ -34,7 +34,6 @@ function AdminDashboard() {
           toast.error('An unexpected error occurred ');
       }
   };
-
   const fetchuserdata = async () => {
     try {
         const result = await viewCount('viewAllUsers');
@@ -74,20 +73,19 @@ const fetchCasedata = async () => {
   }
 };
 
+
     useEffect(() => {
     
     fetchdata();
     fetchuserdata()
-    fetchCasedata()  
+    fetchCasedata()
     }, []);
- 
 
   return (
  
       <div className="container">
-        {/* <label className="main-label container">Dashboard</label> */}
         <div className="row dashboard-adjust mt-5">
-          <div className="col-12 col-sm-6 col-md-3 mb-4 adjust-box">
+          <div className="col-12 col-sm-6 col-md-4 mb-4 adjust-box">
             <div className="dashbord-box">
               <img className="image-adjust" src={userimg} />
               <div className="text-container">
@@ -97,7 +95,7 @@ const fetchCasedata = async () => {
             </div>
           </div>
 
-          <div className="col-12 col-sm-6 col-md-3 mb-4">
+          <div className="col-12 col-sm-6 col-md-4 mb-4">
             <div className="dashbord-box">
               <img className="image-adjust" src={casesimg} />
               <div className="text-container">
@@ -107,29 +105,21 @@ const fetchCasedata = async () => {
             </div>
           </div>
 
-          <div className="col-12 col-sm-6 col-md-3 mb-4">
+          <div className="col-12 col-sm-6 col-md-4 mb-4">
             <div className="dashbord-box">
               <img className="image-adjust" src={adimg} />
               <div className="text-container">
                 <label className="count-label">{advocateCount.length}</label>
-                <label className="content-label">Advocates</label>
+                <label className="content-label">Judges</label>
               </div>
             </div>
           </div>
 
-          <div className="col-12 col-sm-6 col-md-3 mb-4">
-            <div className="dashbord-box">
-              <img className="image-adjust" src={complaintimg} />
-              <div className="text-container">
-                <label className="count-label">{complaints.length}</label>
-                <label className="content-label">Complaints</label>
-              </div>
-            </div>
-          </div>
+          
         </div>
       </div>
     
   );
 }
 
-export default AdminDashboard;
+export default CODashboard;

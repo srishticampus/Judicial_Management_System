@@ -6,6 +6,8 @@ const User = require('./controllers/userController');
 const advocates = require('./controllers/advocateController'); 
 const cases=require('./controllers/caseController')
 const appointments=require('./controllers/appointmentController')
+const chat=require('./controllers/chatController')
+const judges=require('./controllers/judgeController')
 
 // User routes
 
@@ -65,6 +67,29 @@ router.post('/rejectReqbyAdv/:id',appointments.rejectReqbyAdv)
 router.post('/getAppointmentReqsById/:id',appointments.getAppointmentReqsById)
 router.post('/getApprovedAppointmentsForAdv/:id',appointments.getApprovedAppointmentsForAdv)
 router.post('/getApprovedAppointmentsForAdv/:id',appointments.getApprovedAppointmentsForAdv)
+
+
+//chatting
+router.post('/chatting',chat.chatting)
+router.post('/viewChatRecipientsforAdvocateById/:id',chat.viewChatRecipientsforAdvocateById)
+router.post('/viewChatRecipientsforUserId/:id',chat.viewChatRecipientsforUserId)
+router.post('/viewChatBetweenUserAndAdv',chat.viewChatBetweenUserAndAdv)
+
+
+// judge routes
+router.post('/registerJudge', judges.registerJudge);
+router.post('/viewJudgeById/:id', judges.viewJudgeById);
+router.post('/forgotPasswordJudge', judges.forgotPassword);
+router.post('/loginjudge', judges.login);
+router.post('/editJudgeById/:id', judges.editJudgeById);
+router.post('/deleteJudgeById/:id', judges.deleteJudgeById);
+router.post('/resetPasswordJudge/:id', judges.resetPassword);
+router.post('/rejectJudgeById/:id', judges.rejectJudgeById);
+router.post('/activateJudgeById/:id', judges.activateJudgeById);
+router.post('/deactivateJudgeById/:id', judges.deactivateJudgeById);
+router.post('/viewJudges', judges.viewJudges);
+router.post('/viewActiveJudges', judges.viewActiveJudges);
+router.post('/viewJudgesBySpecializn', judges.viewJudgesBySpecializn);
 
 
 module.exports = router;
