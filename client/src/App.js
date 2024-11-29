@@ -36,6 +36,10 @@ import User_BookAppoinment from './Components/User/User_BookAppoinment';
 import Advocate_ViewCaseRequest from './Components/Advocates/Advocate_ViewCaseRequest';
 import AdvocateViewCaseReq from './Components/Advocates/AdvocateViewCaseReq';
 import AdvocateEditProfile from './Components/Advocates/AdvocateEditProfile';
+import UserChattoAdvocate from './Components/User/UserChattoAdvocate';
+import AdvocateChat from './Components/Advocates/AdvocateChat';
+import COLogin from './Components/CourtOffice/COLogin';
+import COMain from './Components/CourtOffice/Dashboard/COMain';
 
 function App() {
   return (
@@ -76,19 +80,34 @@ function App() {
             <Route path="/user-home" element={[<UserNavbar />, <UserHome />, <UserFooter />]} />
             <Route path="/user_profile" element={[<UserNavbar />, <UserProfile />, <UserFooter />]} />
             <Route path="/user_view_case" element={[<UserNavbar />, <UserViewRecentCases />, <UserFooter />]} />
-            <Route path="/user-request-advocate/:id" element={[<UserNavbar />,<User_RequestAdvocate/>,<UserFooter/>]} />
-            <Route path="/user_bookappoinment/:id/:cid" element={[<UserNavbar />,<User_BookAppoinment/>,<UserFooter/>]} />
+            <Route path="/user-request-advocate/:id" element={[<UserNavbar />, <User_RequestAdvocate />, <UserFooter />]} />
+            <Route path="/user_bookappoinment/:id/:cid" element={[<UserNavbar />, <User_BookAppoinment />, <UserFooter />]} />
             <Route path="/user_add_case" element={[<UserNavbar />, <UserAddCases />, <UserFooter />]} />
+            <Route path="/user_chat_to_advocate/:aid" element={[<UserNavbar />, <UserChattoAdvocate />, <UserFooter />]} />
 
 
 
-{/* Advocate */}
-<Route path="/att-signup" element={[<LandingNavbar />, <AdvcateReg />, <UserFooter />]} />
-<Route path="/advocate-login" element={[<LandingNavbar />, <AdvocateLogin />, <UserFooter />]} />
-<Route path="/advocate-home" element={[<AdvocateNavbar />, <AdvocateHome />, <UserFooter />]} />
-<Route path="/advocate_viewcasereq" element={[<AdvocateNavbar />, <Advocate_ViewCaseRequest/>, <UserFooter />]} />
-<Route path="/advocate_view_single_case_req/:id" element={[<AdvocateNavbar />, <AdvocateViewCaseReq />,<UserFooter />]} />
-<Route path="/advocate_edit_profile" element={[<AdvocateNavbar />, <AdvocateEditProfile />,<UserFooter />]} />
+            {/* Advocate */}
+            <Route path="/att-signup" element={[<LandingNavbar />, <AdvcateReg />, <UserFooter />]} />
+            <Route path="/advocate-login" element={[<LandingNavbar />, <AdvocateLogin />, <UserFooter />]} />
+            <Route path="/advocate-home" element={[<AdvocateNavbar />, <AdvocateHome />, <UserFooter />]} />
+            <Route path="/advocate_viewcasereq" element={[<AdvocateNavbar />, <Advocate_ViewCaseRequest />, <UserFooter />]} />
+            <Route path="/advocate_view_single_case_req/:id" element={[<AdvocateNavbar />, <AdvocateViewCaseReq />, <UserFooter />]} />
+            <Route path="/advocate_edit_profile" element={[<AdvocateNavbar />, <AdvocateEditProfile />, <UserFooter />]} />
+            <Route path="/advocate_chat" element={[<AdvocateNavbar />, <AdvocateChat />, <UserFooter />]} />
+            <Route path="/advocate_single_chat/:uid" element={[<AdvocateNavbar />, <AdvocateChat />, <UserFooter />]} />
+
+
+
+            {/* CO */}
+            <Route path="/co-login" element={[<LandingNavbar />, <COLogin />, <AdminFooter />]} />
+            <Route path="/co-dashboard" element={[<AdminNav />, <COMain data="co-dashboard" />, <AdminFooter />]} />
+            <Route path="/co-viewallusers" element={[<AdminNav />, <COMain data="adminviewallusers" />, <AdminFooter />]} />
+            <Route path="/co-add-judge" element={[<AdminNav />, <COMain data="add-judge" />, <AdminFooter />]} />
+            <Route path="/co-view-judges" element={[<AdminNav />, <COMain data="co-view-judges" />, <AdminFooter />]} />
+
+            <Route path="co-view-single-judge/:id" element={[<AdminNav />, <COMain data="co-view-single-judge" />, <AdminFooter />]} />
+
 
           </Routes>
         </div>

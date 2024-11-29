@@ -1,14 +1,13 @@
 const mongoose= require("mongoose");
 
 const advSchema=mongoose.Schema({
+
+
     name:{
         type:String,
         required:true,
     },
-    bcNo:{
-        type:String,
-        required:true,
-    },
+  
   
     contact:{
         type:Number,
@@ -39,33 +38,18 @@ const advSchema=mongoose.Schema({
         required:true
 
     },
-    profilePic:{
-        type:Object,
-        required:true
-
-    },
+  
     
     specialization:{
         type:String,
         required:true
 
     },
-    idProof:{
-        type:Object,
-        required:true
-    },
+   
     isActive:{
         type:Boolean,
-        default:false
-    },
-    adminApproved:{
-        type:Boolean,
-        default:false
-    }, rating:{
-        type:Number,
-        default:0
-      },
-      
-},{timStamps:true});
-module.exports=mongoose.model('advocates',advSchema)
+        default:true
+    } 
+});
+module.exports=mongoose.model('judges',advSchema)
 

@@ -1,39 +1,18 @@
-const Advocate = require('../models/advocateModel');
+const Judge = require('../models/judgeModel');
 
-const multer = require("multer");
-const user=require('../models/userModel')
+const user = require('../models/userModel');
+const advocate = require('../models/advocateModel');
 
 
-const storage = multer.diskStorage({
-  destination: function (req, res, cb) {
-    cb(null, "./upload");
-  },
-  filename: function (req, file, cb) {
-    const uniquePrefix = 'prefix-'; 
-    const originalname = file.originalname;
-    const extension = originalname.split('.').pop();
-    const filename = uniquePrefix + originalname.substring(0, originalname.lastIndexOf('.')) + '-' + Date.now() + '.' + extension;
-    cb(null, filename);
-  },
-});
-const upload = multer({ storage: storage }).fields([
-    { name: 'profilePic', maxCount: 1 },  // For Profile Picture
-    { name: 'idProof', maxCount: 1 }      // For ID Proof
-  ]);
-
-const uploadProfile = multer({ storage: storage }).single('profilePic');
-
-// Register Advocate
-const registerAdvocate = async (req, res) => {
+// Register Judge
+const registerJudge= async (req, res) => {
     try {
-        const { fname,lname, bcNo, contact, email, password, experience, dob,specialization } = req.body;
+        const { fname,lname,  contact, email, password, experience, dob,specialization } = req.body;
 
-        const profilePic = req.files.profilePic[0]
-        const idProof = req.files.idProof[0]
-
-        const newAdvocate = new Advocate({
+        
+        const newJudge = new Judge({
             name:fname+" "+lname,
-            bcNo,
+            
             
             contact,
             email,
@@ -46,36 +25,31 @@ const registerAdvocate = async (req, res) => {
             experience,
            
             specialization,
-            idProof:idProof,
-            profilePic:profilePic
+           
         });
-        let existingAdvocate3 = await Advocate.findOne({ email });
+        let existingJudge3 = await Judge.findOne({ email });
         
-        let existingAdvocate5 = await user.findOne({ email });
+        let existingJudge5 = await user.findOne({ email });
 
-        let existingAdvocate = await Advocate.findOne({ bcNo });
-        let existingAdvocate2 = await Advocate.findOne({ contact });
-        if (existingAdvocate) {
-            return res.json({
-                status: 409,
-                msg: "BarCouncil Enrollment Number Already Registered With Us !!",
-                data: null
-            });
-        }
-        else if(existingAdvocate2) {
+        let existingJudge2 = await Judge.findOne({ contact });
+        let existingJudge4 = await user.findOne({ email });
+        let existingJudge6 = await advocate.findOne({ email });
+
+    
+         if(existingJudge2) {
             return res.json({
                 status: 409,
                 msg: "Contact Number Already Registered With Us !!",
                 data: null
             });
-        }   else if(existingAdvocate3||existingAdvocate5) {
+        }   else if(existingJudge3||existingJudge5||existingJudge4||existingJudge6) {
             return res.status(409).json({
                 status: 409,
                 msg: "Email Already Registered With Us !!",
                 data: null
             });
         }
-        await newAdvocate.save()
+        await newJudge.save()
             .then(data => {
                 return res.status(200).json({
                     status: 200,
@@ -106,9 +80,9 @@ const registerAdvocate = async (req, res) => {
     }
 };
 
-// View all advocates
-const viewAdvocates = (req, res) => {
-    Advocate.find({adminApproved:true})
+// View all Judges
+const viewJudges = (req, res) => {
+    Judge.find({})
         .exec()
         .then(data => {
             if (data.length > 0) {
@@ -133,8 +107,8 @@ const viewAdvocates = (req, res) => {
             });
         });
 };
-const viewActiveAdvocates = (req, res) => {
-    Advocate.find({isActive:true})
+const viewActiveJudges = (req, res) => {
+    Judge.find({isActive:true})
         .exec()
         .then(data => {
             if (data.length > 0) {
@@ -161,36 +135,9 @@ const viewActiveAdvocates = (req, res) => {
 };
 
 
-// View all advocates
-const viewAdvocatesBySpecializn = (req, res) => {
-    Advocate.find({specialization:req.body.specialization}).sort({rating:-1}).limit(5)
-        .exec()
-        .then(data => {
-            if (data.length > 0) {
-                res.json({
-                    status: 200,
-                    msg: "Data obtained successfully",
-                    data: data
-                });
-            } else {
-                res.json({
-                    status: 200,
-                    msg: "No Data obtained"
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500).json({
-                status: 500,
-                msg: "Data not obtained",
-                Error: err
-            });
-        });
-};
-
-// View all advocate Reqs
-const viewAdvocateReqs = (req, res) => {
-    Advocate.find({adminApproved:false})
+// View all Judges
+const viewJudgesBySpecializn = (req, res) => {
+    Judge.find({specialization:req.body.specialization}).sort({rating:-1}).limit(5)
         .exec()
         .then(data => {
             if (data.length > 0) {
@@ -216,9 +163,11 @@ const viewAdvocateReqs = (req, res) => {
 };
 
 
-// approve Advocate
-const approveAdvocateById = (req, res) => {
-    Advocate.findByIdAndUpdate({_id:req.params.id},{adminApproved:true})
+
+
+// approve Judge
+const activateJudgeById = (req, res) => {
+    Judge.findByIdAndUpdate({_id:req.params.id},{isActive:true})
         .exec()
         .then(data => {
             if (data.length > 0) {
@@ -244,9 +193,9 @@ const approveAdvocateById = (req, res) => {
 };
 
 
-// approve Advocate
-const activateAdvocateById = (req, res) => {
-    Advocate.findByIdAndUpdate({_id:req.params.id},{isActive:true})
+// approve Judge
+const deactivateJudgeById = (req, res) => {
+    Judge.findByIdAndUpdate({_id:req.params.id},{isActive:false})
         .exec()
         .then(data => {
             if (data.length > 0) {
@@ -272,37 +221,9 @@ const activateAdvocateById = (req, res) => {
 };
 
 
-// approve Advocate
-const deactivateAdvocateById = (req, res) => {
-    Advocate.findByIdAndUpdate({_id:req.params.id},{isActive:false})
-        .exec()
-        .then(data => {
-            if (data.length > 0) {
-                res.json({
-                    status: 200,
-                    msg: "Data obtained successfully",
-                    data: data
-                });
-            } else {
-                res.json({
-                    status: 200,
-                    msg: "No Data obtained"
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500).json({
-                status: 500,
-                msg: "Data not obtained",
-                Error: err
-            });
-        });
-};
-
-
-// reject Advocate
-const rejectAdvocateById = (req, res) => {
-    Advocate.findByIdAndDelete({_id:req.params.id})
+// reject Judge
+const rejectJudgeById = (req, res) => {
+    Judge.findByIdAndDelete({_id:req.params.id})
         .exec()
         .then(data => {
             if (data.length > 0) {
@@ -327,26 +248,25 @@ const rejectAdvocateById = (req, res) => {
         });
 };
 
-// Update advocate by ID
-const editAdvocateById = async (req, res) => {
-    const { name, bcNo, bcState, contact, email, password, gender, address, experience, nationality, qualification, dob, professionalExperience, dateOfEnrollment, specialization } = req.body;
+// Update Judge by ID
+const editJudgeById = async (req, res) => {
+    const { name, contact, email, password, gender,  experience,  dob,   specialization } = req.body;
 console.log("profilePic",req.body.filename);
-    Advocate.findByIdAndUpdate({ _id: req.params.id }, {
+    Judge.findByIdAndUpdate({ _id: req.params.id }, {
         name,
-        bcNo,
+       
         
         contact,
         email,
         password,
         gender,
-        address,
+       
         experience,
        
         dob,
-        professionalExperience,
-        
+     
         specialization,
-        profilePic:req.file
+        
     })
         .exec()
         .then(data => {
@@ -364,11 +284,11 @@ console.log("profilePic",req.body.filename);
         });
 };
 
-// View advocate by ID
-const viewAdvocateById = (req, res) => {
+// View Judge by ID
+const viewJudgeById = (req, res) => {
     console.log(req.params.id );
     
-    Advocate.findById({ _id: req.params.id })
+    Judge.findById({ _id: req.params.id })
         .exec()
         .then(data => {
             console.log(data);
@@ -390,9 +310,9 @@ const viewAdvocateById = (req, res) => {
         });
 };
 
-// Delete advocate by ID
-const deleteAdvocateById = (req, res) => {
-    Advocate.findByIdAndUpdate({ _id: req.params.id },{isActive:'inactive'})
+// Delete Judge by ID
+const deleteJudgeById = (req, res) => {
+    Judge.findByIdAndUpdate({ _id: req.params.id },{isActive:'inactive'})
         .exec()
         .then(data => {
             res.json({
@@ -410,17 +330,17 @@ const deleteAdvocateById = (req, res) => {
         });
 };
 
-// Forgot Password for advocate
+// Forgot Password for Judge
 const forgotPassword =async (req, res) => {
 
     let userData=null,type="nil"
-   const adv= await Advocate.findOne({email: req.body.email })
+   const adv= await Judge.findOne({email: req.body.email })
 
 
     const user=await user.findOne({  email: req.body.email })
 
     if(adv){
-    Advocate.findOneAndUpdate({ email: req.body.email }, {
+    Judge.findOneAndUpdate({ email: req.body.email }, {
         password: req.body.password
     })
         .exec()
@@ -451,11 +371,11 @@ const forgotPassword =async (req, res) => {
     })
 }
 }
-// Reset Password for advocate
+// Reset Password for Judge
 const resetPassword = async (req, res) => {
     let pwdMatch = false;
 
-    await Advocate.findById({ _id: req.params.id })
+    await Judge.findById({ _id: req.params.id })
         .exec()
         .then(data => {
             if (data.password === req.body.oldpassword)
@@ -470,7 +390,7 @@ const resetPassword = async (req, res) => {
         });
 
     if (pwdMatch) {
-        await Advocate.findByIdAndUpdate({ _id: req.params.id }, {
+        await Judge.findByIdAndUpdate({ _id: req.params.id }, {
             password: req.body.newpassword
         })
             .exec()
@@ -501,13 +421,13 @@ const resetPassword = async (req, res) => {
     }
 };
 
-//advocate login
+//Judge login
 
 // Login User
 const login = (req, res) => {
     const { email, password } = req.body;
 
-    Advocate.findOne({ email }).then(user => {
+    Judge.findOne({ email }).then(user => {
         if (!user) {
             return res.status(404).json({ msg: 'User not found' });
         }
@@ -517,9 +437,7 @@ console.log(user);
             return res.status(403).json({ msg: 'Password Mismatch !!' });
         }
 
-        if (!user.adminApproved) {
-            return res.status(403).json({ msg: 'Please wait for Admin Approval !!' });
-        } 
+       
         if (!user.isActive) {
             return res.status(403).json({ msg: 'You are currently deactivated By Admin !!' });
         }
@@ -540,57 +458,21 @@ console.log(user);
 
 //
 
-const addRating = (req, res) => {
-    let newRate = parseInt(req.body.rating);
-    let rating = 0;
-    Advocate.findById({ _id: req.params.id })
-      .exec()
-      .then((data) => {
-        rating = data.rating;
-        if (data.rating != 0) rating = (rating + newRate) / 2;
-        else rating = newRate;
-        Advocate.findByIdAndUpdate(
-          { _id: req.params.id },
-          {
-            rating: rating,
-          },
-          { new: true }
-        )
-          .exec()
-          .then((data) => {
-            res.json({
-              status: 200,
-              msg: "Data obtained successfully",
-              data: data,
-            });
-          })
-          .catch((err) => {
-            res.json({
-              status: 500,
-              msg: "Data not Inserted",
-              Error: err,
-            });
-          });
-      });
-  };
-  
+
 module.exports = {
-    registerAdvocate,
-    viewAdvocates,
-    editAdvocateById,
-    viewActiveAdvocates,
-    viewAdvocateById,
-    deleteAdvocateById,
+    registerJudge,
+    viewJudges,
+    editJudgeById,
+    viewActiveJudges,
+    viewJudgeById,
+    deleteJudgeById,
     forgotPassword,
     resetPassword,
     login,
-    upload,
-    viewAdvocateReqs,
-    approveAdvocateById,
-    rejectAdvocateById,
-    activateAdvocateById,
-    deactivateAdvocateById,
-    uploadProfile,
-    viewAdvocatesBySpecializn,
-    addRating
+   
+    rejectJudgeById,
+    activateJudgeById,
+    deactivateJudgeById,
+    viewJudgesBySpecializn,
+    
 };
