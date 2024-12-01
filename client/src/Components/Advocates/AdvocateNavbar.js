@@ -15,9 +15,13 @@ function AdvocateNavbar() {
 
   const handleLogout = () => {
     localStorage.removeItem('advocate');
-    toast.success('Logged out successfully.');
-    navigate('/advocate-login');
+        toast.success('Logged out successfully.');
+      navigate('/', { replace: true });
+        setTimeout(() => {
+      window.location.reload();
+    }, 500); // Reload after a slight delay for toast to appear
   };
+  
 
   return (
     <div>
@@ -62,12 +66,7 @@ function AdvocateNavbar() {
                 </Link>
               </li>
 
-              <li className="nav-item">
-                <Link to='/advocate_add_complaints' className="nav-link">
-                  Complaints
-                </Link>
-              </li>
-
+             
               <li className="nav-item">
                 <Link className="nav-link" onClick={handleLogout}>
                   Logout

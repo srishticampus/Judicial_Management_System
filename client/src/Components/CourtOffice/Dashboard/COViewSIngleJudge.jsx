@@ -186,7 +186,7 @@ function COViewSingleJudge({ view }) {
                 {isEditing ? (
                   <button
                     type="button"
-                    className="btn btn-success w-50 mt-3"
+                    className="btn btn-secondary w-50 mt-3"
                     onClick={handleSave}
                   >
                     Save

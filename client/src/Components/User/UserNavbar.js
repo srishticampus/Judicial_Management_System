@@ -15,7 +15,10 @@ function UserNavbar() {
 
     const handleLogout = () => {
       localStorage.removeItem('user');
-        navigate("/user-login");
+        navigate("/");
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
        
       };
 
@@ -59,25 +62,22 @@ function UserNavbar() {
               </div>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/client-viewalladvocate">Advocate</Link>
+              <Link className="nav-link" to="/user-viewalladvocate">Advocate</Link>
             </li>
+           
             <li className="nav-item">
-              <Link className="nav-link" to="/client-viewblogs">Articles</Link>
+              <Link className="nav-link" to="/user-add-feed">Feedback</Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/user_add_complaint">Complaint</Link>
-            </li>
-            
             <li className="nav-item dropdown">
               <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Settings
               </Link>
               <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <Link to='/user_profile' className="dropdown-item" >Profile</Link>
-                {/* <Link onClick={handleLogout} to='' className="dropdown-item" >Logout</Link> */}
-                <button onClick={handleLogout} className="dropdown-item" style={{ border: 'none', background: 'none', padding: 0, color: 'inherit',marginLeft:'15px' }}>
-  Logout
-</button>
+                <Link onClick={handleLogout} to='' className="dropdown-item" >Logout</Link>
+                {/* <button onClick={handleLogout} className="dropdown-item" style={{ border: 'none', background: 'none', padding: 0, color: 'inherit',marginLeft:'15px' }}> */}
+  {/* Logout
+</button> */}
 
               </div>
             </li>

@@ -50,21 +50,25 @@ const imageUrl=IMG_BASE_URL
   const [resource, setResource] = useState([]);
 
   useEffect(() => {
-    // axiosInstance
-    //   .post(`/getAppointmentReqsForAdv/${id}`)
-    //   .then((res) => {
-    //     console.log(res);
-    //     if (res.data.status === 200) {
-    //       setData(res.data.data || []);
-    //     } else {
-    //       setData([]);
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error!", error);
-    //   });
-  
-    
+    const fetchdata = async () => {
+      try {
+        console.log("id",id);
+        
+          const result = await ViewById('getAppointmentReqsForAdv',id);
+
+          if (result.success) {
+              console.log(result);
+              setData(result.user||[]);
+          } else {
+              console.error('Advocate View Error :', result);
+           
+          }
+      } catch (error) {
+          console.error('Unexpected error:', error);
+          toast.error('An unexpected error occurred during login');
+      }
+  };
+  fetchdata();
   }, [id]);
 
   console.log(data);

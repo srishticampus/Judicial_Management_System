@@ -16,11 +16,11 @@ function Advocate_ViewCaseRequest() {
       try {
         console.log("id",id);
         
-          const result = await ViewById('getAppointmentReqsForAdv',id);
+          const result = await ViewById('getAppointmentReqsById',id);
 
           if (result.success) {
               console.log(result);
-              setData(result.user||[]);
+              setData(result.user||null);
           } else {
               console.error('Advocate View Error :', result);
               // toast.error(result.message);

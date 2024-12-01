@@ -65,12 +65,12 @@ function COSidebar() {
                 <label className='label-sub'>Users</label>
                 </Link>
                 </div>
-                <div className='adjust-space'>
+                {/* <div className='adjust-space'>
                 <img src={advocateimg} className='img2-padding' alt='User image'/>{' '},{' '},{' '}
                     <Link to='/co-viewalladvocates'>
                     <label className='label-sub'>Advocate</label>
                     </Link>
-                </div>
+                </div> */}
                 <div className='adjust-space'>
                 <img src={casesimg} className='image-adjust-1 padding each' alt='User image'/>{' '},{' '},{' '}
                 <Link to={'/co_view_cases'}>
@@ -81,7 +81,7 @@ function COSidebar() {
                
                 <div className='adjust-space'>
                 <img src={juniorimg} className='image-adjust-1 padding each' alt='User image'/>{' '},{' '},{' '}
-                <Link to={'/co_view_judges'}>
+                <Link to={'/co-view-judges'}>
                 <label className='label-sub'>Judges</label>
 
                 </Link>

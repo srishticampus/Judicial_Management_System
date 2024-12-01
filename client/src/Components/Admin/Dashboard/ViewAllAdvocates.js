@@ -108,14 +108,15 @@ function ViewAllAdvocates() {
                     <td className="table-data">
                       {advocate.isActive ? (
                         <button
-                          className="btn btn-outline-danger button-size1"
+                          className="btn btn-outline-danger button-size1 p-3 mr-2"
+                          style={{ paddingRight: '15px' }}
                           onClick={() => handleDeactivate(advocate._id)}
                         >
                           Deactivate
                         </button>
                       ) : (
                         <button
-                          className="btn btn-outline-success button-size1"
+                          className="btn btn-outline-success button-size1 p-3 mr-2"
                           onClick={() => handleActivate(advocate._id)}
                         >
                           Activate

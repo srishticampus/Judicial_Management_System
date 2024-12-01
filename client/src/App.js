@@ -40,6 +40,20 @@ import UserChattoAdvocate from './Components/User/UserChattoAdvocate';
 import AdvocateChat from './Components/Advocates/AdvocateChat';
 import COLogin from './Components/CourtOffice/COLogin';
 import COMain from './Components/CourtOffice/Dashboard/COMain';
+import JudgeLogin from './Components/Judge/JudgeLogin';
+import JudgeHome from './Components/Judge/JudgeHome';
+import JudgeNavbar from './Components/Judge/JudgeNavbar';
+import JudgeViewCases from './Components/Judge/JudgeViewCases';
+import JudgeViewSingleCase from './Components/Judge/JudgeViewSingleCase';
+import CaseHearings from './Components/Judge/CaseHearings';
+import JudgeViewClosedCases from './Components/Judge/JudgeViewClosedCases';
+import AdvocateViewAprvdCases from './Components/Advocates/AdvocateViewAprvdCases';
+import AdvocateViewSingleAprvd from './Components/Advocates/AdvocateViewSingleAprvd';
+import AdvocateCaseHearings from './Components/Advocates/AdvocateCaseHearings';
+import UserViewHearingDetails from './Components/User/UserViewHearingDetails';
+import User_ViewAllAdvocates from './Components/User/User_ViewAllAdvocates';
+import User_ViewAdvocateDetail from './Components/User/User_ViewAdvocateDetail.jsx';
+import UserAddFeedbacks from './Components/User/UserAddFeedbacks.js';
 
 function App() {
   return (
@@ -71,6 +85,9 @@ function App() {
             <Route path="/admin-adv-reqs" element={[<AdminNav />, <AdminMain data="admin-adv-reqs" />, <AdminFooter />]} />
             <Route path="/adminviewrequest/:id" element={[<AdminNav />, <AdminMain data="adminviewrequest" />, <AdminFooter />]} />
             <Route path="/admin_view_single_user/:id" element={[<AdminNav />, <AdminMain data="admin-view-single-user" />, <AdminFooter />]} />
+            <Route path="/admin_view_cases" element={[<AdminNav />, <AdminMain data="admin_view_cases" />, <AdminFooter />]} />
+            <Route path="/admin_view_feedbacks" element={[<AdminNav />, <AdminMain data="admin_view_feedbacks" />, <AdminFooter />]} />
+            <Route path="/admin_view_single_case/:id" element={[<AdminNav />, <AdminMain data="viewSingleCase" />, <AdminFooter />]} />
 
 
 
@@ -84,6 +101,10 @@ function App() {
             <Route path="/user_bookappoinment/:id/:cid" element={[<UserNavbar />, <User_BookAppoinment />, <UserFooter />]} />
             <Route path="/user_add_case" element={[<UserNavbar />, <UserAddCases />, <UserFooter />]} />
             <Route path="/user_chat_to_advocate/:aid" element={[<UserNavbar />, <UserChattoAdvocate />, <UserFooter />]} />
+            <Route path="/user_view_case_updations/:id" element={[<UserNavbar />, <UserViewHearingDetails />, <UserFooter />]} />
+            <Route path="/user-viewalladvocate" element={[<UserNavbar />,<User_ViewAllAdvocates />,<UserFooter/>]} />
+            <Route path="/user_view_advocate_detail/:id" element={[<UserNavbar />,<User_ViewAdvocateDetail/>,<UserFooter/>]} />
+            <Route path="/user-add-feed" element={[<UserNavbar />,<UserAddFeedbacks/>,<UserFooter/>]} />
 
 
 
@@ -96,17 +117,31 @@ function App() {
             <Route path="/advocate_edit_profile" element={[<AdvocateNavbar />, <AdvocateEditProfile />, <UserFooter />]} />
             <Route path="/advocate_chat" element={[<AdvocateNavbar />, <AdvocateChat />, <UserFooter />]} />
             <Route path="/advocate_single_chat/:uid" element={[<AdvocateNavbar />, <AdvocateChat />, <UserFooter />]} />
+            <Route path="/advocate_view_all_recent_case" element={[<AdvocateNavbar />, <AdvocateViewAprvdCases />, <UserFooter />]} />
+            <Route path="/single_aprvd_case_req/:id" element={[<AdvocateNavbar />, <AdvocateViewSingleAprvd />, <UserFooter />]} />
+            <Route path="/adv-case-hearings/:id" element={[<AdvocateNavbar />, <AdvocateCaseHearings />, <UserFooter />]} />
 
 
 
             {/* CO */}
             <Route path="/co-login" element={[<LandingNavbar />, <COLogin />, <AdminFooter />]} />
             <Route path="/co-dashboard" element={[<AdminNav />, <COMain data="co-dashboard" />, <AdminFooter />]} />
-            <Route path="/co-viewallusers" element={[<AdminNav />, <COMain data="adminviewallusers" />, <AdminFooter />]} />
+            <Route path="/co-viewallusers" element={[<AdminNav />, <COMain data="co-viewallusers" />, <AdminFooter />]} />
             <Route path="/co-add-judge" element={[<AdminNav />, <COMain data="add-judge" />, <AdminFooter />]} />
             <Route path="/co-view-judges" element={[<AdminNav />, <COMain data="co-view-judges" />, <AdminFooter />]} />
+            <Route path="co_view_cases" element={[<AdminNav />, <COMain data="co_view_cases" />, <AdminFooter />]} />
 
             <Route path="co-view-single-judge/:id" element={[<AdminNav />, <COMain data="co-view-single-judge" />, <AdminFooter />]} />
+            <Route path="co-view-singleCase/:id" element={[<AdminNav />, <COMain data="co-view-singleCase" />, <AdminFooter />]} />
+
+
+            {/* Judge */}
+            <Route path="/judge-login" element={[<LandingNavbar />, <JudgeLogin />, <AdminFooter />]} />
+            <Route path="/judge-home" element={[<JudgeNavbar />, <JudgeHome />, <AdminFooter />]} />
+            <Route path="/judge-view-cases" element={[<JudgeNavbar />, <JudgeViewCases />, <AdminFooter />]} />
+            <Route path="/judge_view_single_case_req/:id" element={[<JudgeNavbar />, <JudgeViewSingleCase />, <AdminFooter />]} />
+            <Route path="/case-hearings/:id" element={[<JudgeNavbar />,<CaseHearings/>,<AdminFooter/>]} />
+            <Route path="/judge-view-closed-cases" element={[<JudgeNavbar />,<JudgeViewClosedCases/>,<AdminFooter/>]} />
 
 
           </Routes>
