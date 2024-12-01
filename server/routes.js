@@ -8,6 +8,8 @@ const cases=require('./controllers/caseController')
 const appointments=require('./controllers/appointmentController')
 const chat=require('./controllers/chatController')
 const judges=require('./controllers/judgeController')
+const caseStatusController=require('./controllers/caseStatusController')
+const feedback=require('./controllers/feedbackController')
 
 // User routes
 
@@ -57,6 +59,10 @@ router.post('/getCaseByUserId/:id',cases.getCaseByUserId)
 router.post('/getCaseById/:id',cases.getCaseById)
 router.post('/deleteCase/:id',cases.deleteCase)
 router.post('/getAllCases',cases.getAllCases)
+router.post('/getCaseAdvStatus',cases.getCaseAdvStatus)
+router.post('/assignJudgeCaseById/:id',cases.assignJudgeCaseById)
+router.post('/getCaseByJudgeId/:id',cases.getCaseByJudgeId)
+router.post('/getClosedCaseByJudgeId/:id',cases.getClosedCaseByJudgeId)
 
 // Appointments
 router.post('/createAppointment',appointments.createAppointment)
@@ -65,7 +71,6 @@ router.post('/getAppointmentReqsForAdv/:id',appointments.getAppointmentReqsForAd
 router.post('/acceptReqbyAdv/:id',appointments.acceptReqbyAdv)
 router.post('/rejectReqbyAdv/:id',appointments.rejectReqbyAdv)
 router.post('/getAppointmentReqsById/:id',appointments.getAppointmentReqsById)
-router.post('/getApprovedAppointmentsForAdv/:id',appointments.getApprovedAppointmentsForAdv)
 router.post('/getApprovedAppointmentsForAdv/:id',appointments.getApprovedAppointmentsForAdv)
 
 
@@ -91,5 +96,14 @@ router.post('/viewJudges', judges.viewJudges);
 router.post('/viewActiveJudges', judges.viewActiveJudges);
 router.post('/viewJudgesBySpecializn', judges.viewJudgesBySpecializn);
 
+//case status
+router.post('/createStatus',caseStatusController.createStatus)
+router.post('/getStatusById/:id',caseStatusController.getStatusById)
+router.post('/getStatusByCaseId/:id',caseStatusController.getStatusByCaseId)
+
+//Feedback
+router.post('/addfeedback',feedback.addfeedback)
+router.post('/viewAllfeedbacks',feedback.viewAllfeedbacks)
+router.post('/viewfeedbackById/:id',feedback.viewfeedbackById)
 
 module.exports = router;

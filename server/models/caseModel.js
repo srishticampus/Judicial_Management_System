@@ -10,6 +10,15 @@ const caseSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    judgeId:{
+        type: mongoose.Schema.Types.ObjectId,
+        default: null,
+        ref: 'judges'
+    },
+    judgeStatus:{
+        type: Boolean,
+        default: false
+    },
     description: {
         type: String,
         required: true,

@@ -81,7 +81,12 @@ function COViewAlljudges() {
     
       return (
         <div className="main-div">
+          <h3 className="admin-user-req-link"><Link to='/co-add-judge' className="admin-user-req-linkh3" >Add New Judge</Link></h3>
+
           {data.length !== 0 ? (
+            <>
+                                <h2 className="advocateRegistrationtitle">View All Judges</h2>
+
             <div className="table-container table-striped">
               <table className="table-change container-fluid">
                 <thead className="admin-tab-head">
@@ -117,14 +122,14 @@ function COViewAlljudges() {
                         <td className="table-data">
                       {advocate.isActive ? (
                         <button
-                          className="btn btn-outline-danger button-size"
+                          className="btn btn-outline-danger button-size p-2"
                           onClick={() => handleDeactivate(advocate._id)}
                         >
                           Deactivate
                         </button>
                       ) : (
                         <button
-                          className="btn btn-outline-success button-size"
+                          className="btn btn-outline-success button-size p-2"
                           onClick={() => handleActivate(advocate._id)}
                         >
                           Activate
@@ -141,6 +146,7 @@ function COViewAlljudges() {
                 </tbody>
               </table>
             </div>
+            </>
           ) : (
             <div className="no_data_animation">
               <Lottie animationData={noReqFound} className="no_data_animation" />

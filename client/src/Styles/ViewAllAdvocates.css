@@ -27,7 +27,7 @@
 }
 
 .button-size{
-    width: 100px;
+    width: 120px;
 }
   
 th, td {
@@ -57,12 +57,7 @@ th, td {
     background-color: #986f0668 ;
 }
 
-.button-size1{
+/* .button-size1{
     height: 46px;
     width: 55px;
-}
-
-
-.button-size1{
-    width: 100px;
-}
+} */

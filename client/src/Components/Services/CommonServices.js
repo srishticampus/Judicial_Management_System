@@ -33,6 +33,7 @@ export const login = async (data, api) => {
 export const register = async (data, api) => {
     try {
 
+console.log(data);
 
         const response = await axios.post(`${API_BASE_URL}/${api}`, data);
         console.log(response);
@@ -180,6 +181,8 @@ export const ViewById = async (api, id) => {
 
         if (response.status === 200) {
             const { result } = response.data;
+           
+            
             return { success: true, user: response.data.data };
         } else {
             return { success: false, message: response.data.msg };

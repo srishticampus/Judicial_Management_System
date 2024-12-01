@@ -18,6 +18,7 @@ import AdminViewEvidences from "./AdminViewEvidences";
 import AdminViewPayment from "./AdminViewPayment";
 import AdminViewUserReqs from "./AdminViewUserReqs";
 import AdminViewAdvReqs from "./AdminViewAdvReqs";
+import AdminViewFeedbacks from "./AdminViewFeedbacks";
 
 function AdminMain({ data }) {
   const navigate = useNavigate(); 
@@ -50,7 +51,8 @@ function AdminMain({ data }) {
           ) : data === "adminviewalladvocates" ? (
             <ViewAllAdvocates />
          
-        
+          ) : data === "viewSingleCase" ? (
+            <AdminViewSingleCase />
           
         
           ) : data === "complaints" ? (
@@ -59,7 +61,7 @@ function AdminMain({ data }) {
             <AdminViewUsers />
           ) : data === "admin-view-single-user" ? (
             <AdminViewSingleUsers />
-          ) : data === "viewCases" ? (
+          ) : data === "admin_view_cases" ? (
             <AdminViewAllCases />
           ) : data === "viewSingleCase" ? (
             <AdminViewSingleCase />
@@ -67,10 +69,11 @@ function AdminMain({ data }) {
             <AdminViewCaseStatus />
           ) : data === "evidence" ? (
             <AdminViewEvidences />
-          ) : data === "payment" ? (
-            <AdminViewPayment />
+          ) : data === "admin_view_feedbacks" ? (
+            <AdminViewFeedbacks />
           ) : data === "admin-userreqs" ? (
             <AdminViewUserReqs />
+          
           ) : (
             <AdminLogin />
           )}

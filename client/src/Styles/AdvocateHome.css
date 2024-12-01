@@ -12,7 +12,31 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+.advocate_home {
+  background-color: #f3eded;
+  padding-bottom: 20px;
+}
 
+.judge_home_banner {
+  height: 75vh;
+  width: 100%;
+  background-image: url(../Assets/courth2.avif); /* Image path */
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centers content horizontally */
+  background-repeat: no-repeat;
+  background-size: cover; /* Ensures image covers the area */
+  background-position: center; /* Ensures the center of the image is displayed */
+}
+
+.judge_home_banner p {
+  font-size: 31px;
+  font-weight: 700;
+  line-height: 46.5px;
+  text-align: left;
+  color: #0a0a0a; /* Text color */
+  text-shadow: 2px 2px 2px #986f06;
+}
 .advocate_home_banner p {
   font-size: 31px;
   font-weight: 700;
@@ -20,7 +44,6 @@
   text-align: left;
   color: #ffffff;
 }
-
 .advocate_home_container {
   padding: 20px 0;
   display: flex;

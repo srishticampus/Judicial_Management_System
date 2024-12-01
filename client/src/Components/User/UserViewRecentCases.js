@@ -10,9 +10,10 @@ import icon7 from "../../Assets/recentIcon7.png";
 import noReqFound from "../../Assets/noReqFound.json";
 import Lottie from "lottie-react";
 import { toast } from "react-toastify";
+import ReactStars from "react-rating-stars-component";
 
 import { Modal, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IMG_BASE_URL } from '../Services/BaseURL';
 import {  ViewById } from "../Services/CommonServices";
 function UserViewRecentCases() {
@@ -25,7 +26,7 @@ function UserViewRecentCases() {
   const id = localStorage.getItem("user");
 
 
-
+const navigate=useNavigate()
   
   const fetchSuggestion=async()=>{
   
@@ -47,7 +48,14 @@ function UserViewRecentCases() {
     fetchSuggestion()
     
   }, [id]);
- 
+
+  // let a = data.advocateId.rating ? data.advocateId.rating : 0;
+
+  useEffect(()=>{
+    if(localStorage.getItem('user'==null)){
+        navigate('/')
+    }
+})
 
   const handleViewEvidence = (fileUrl) => {
     if (!fileUrl) {
@@ -120,6 +128,7 @@ function UserViewRecentCases() {
                         <th scope="col">Case Details</th>
                         <th scope="col">Opponent Details</th>
                         <th scope="col">Case Description</th>
+                        
                       </tr>
                     </thead>
                     <tbody>
@@ -231,6 +240,7 @@ function UserViewRecentCases() {
                                     )}
                                   </div>
                                 </div>
+                              
                               </div>
                             </td>
                           </tr>

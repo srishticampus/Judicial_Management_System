@@ -10,7 +10,7 @@ function UserProfile() {
     const navigate = useNavigate();
 
   useEffect(() => {
-    if (localStorage.getItem('userId') == null) {
+    if (localStorage.getItem('user') == null) {
       navigate('/');
     }
   }, [navigate]);

@@ -120,7 +120,70 @@ const getCaseById = async (req, res) => {
     });
   }
 };
+// Get all advocateAcceptedCases
+const getCaseAdvStatus = async (req, res) => {
+  try {
+    const caseItem = await Case.find({ advocateStatus:'true',judgeStatus:false }).populate('advocateId').populate('userId');
+    if (!caseItem) {
+      return res.json({
+        status: 404,
+        msg: "No Cases found",
+        data:[]
+      });
+    }
+    res.json({
+      status: 200,
+      data: caseItem,
+      msg: "data obtained succesfully",
+    });
+  } catch (err) {
+    res.json({
+      status: 500,
+      msg: "Error retrieving case",
+      data: err,
+    });
+  }
+};
 
+const getCaseByJudgeId = async (req, res) => {
+  try {
+    const caseItem = await Case.find({ judgeId:req.params.id,
+      caseStatus:{$ne:'Closed'}
+     }).populate('advocateId').populate('userId');
+
+    res.json({
+      status: 200,
+      data: caseItem,
+      msg: "data obtained succesfully",
+    });
+  } catch (err) {
+    res.json({
+      status: 500,
+      msg: "Error retrieving case",
+      data: err,
+    });
+  }
+};
+
+const getClosedCaseByJudgeId = async (req, res) => {
+  try {
+    const caseItem = await Case.find({ judgeId:req.params.id,
+     caseStatus:'Closed'
+     }).populate('advocateId').populate('userId');
+
+    res.json({
+      status: 200,
+      data: caseItem,
+      msg: "data obtained succesfully",
+    });
+  } catch (err) {
+    res.json({
+      status: 500,
+      msg: "Error retrieving case",
+      data: err,
+    });
+  }
+};
 // Update a case by ID
 const updateCase = async (req, res) => {
   try {
@@ -156,7 +219,27 @@ const updateCase = async (req, res) => {
     });
   }
 };
-
+// Add adv
+const assignJudgeCaseById = async (req, res) => {
+  try {
+    const deletedCase = await Case.findByIdAndUpdate(req.params.id,{
+      judgeId:req.body.judgeId,
+      judgeStatus:true
+    });
+   
+    res.json({
+      status: 200,
+      msg: "Case Updated successfully",
+      data: deletedCase,
+    });
+  } catch (err) {
+    res.json({
+      status: 500,
+      msg: "Error deleting case",
+      data: err,
+    });
+  }
+};
 // Delete a case by ID
 const deleteCase = async (req, res) => {
   try {
@@ -298,5 +381,9 @@ module.exports = {
   deleteCase,
   upload,
   getCaseType,
+  getCaseAdvStatus,
   getCaseByUserId,
+  assignJudgeCaseById,
+  getCaseByJudgeId  ,
+  getClosedCaseByJudgeId
 };

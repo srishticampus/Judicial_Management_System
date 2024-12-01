@@ -3,14 +3,20 @@
   background-color: #f3eded;
   padding: 80px 0;
 }
+.add_cases_status {
 
+  background-color: #f3eded;
+  padding: 20px 0;
+}
 .user_add_cases_title label {
   font-size: 20.43px;
   font-weight: 400;
   line-height: 27.17px;
   text-align: left;
 }
-
+.adv-case-hearing{
+  min-height: 400px;
+}
 .user_add_case_sugg_box1 {
   padding: 0 20px;
 }
@@ -70,4 +76,7 @@
 .user_add_case_sugg_box1_details i {
   font-size: 28.43px;
   font-weight: 400;
+}
+.align-right{
+  margin-left: 50%;
 }

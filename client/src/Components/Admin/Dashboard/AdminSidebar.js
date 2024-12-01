@@ -79,15 +79,10 @@ function AdminSidebar() {
                 </Link>
                 </div>
                
-                <div className='adjust-space'>
-                <img src={juniorimg} className='image-adjust-1 padding each' alt='User image'/>{' '},{' '},{' '}
-                    <Link to='/adminviewalljunioradvocates'>
-                    <label className='label-sub '>Complaints</label>
-                    </Link>
-                </div>
+             
                 <div className='adjust-space'>
                 <img src={rentimg} className='image-adjust-1 padding each-1' alt='User image'/>{' '},{' '}
-                    <Link to={'/admin_view_approved_interns'}><label className='label-sub padding'>Feedback</label></Link>
+                    <Link to={'/admin_view_feedbacks'}><label className='label-sub padding'>Feedback</label></Link>
                 </div>
                
                 <div className='adjust-space'>

@@ -12,6 +12,7 @@ function AdminDashboard() {
   const [advocateCount, setAdvocateCount] = useState(0);
   const [cases, setCases] = useState(0);
   const [complaints, setComplaints] = useState(0);
+  const [feeds, setFeeds] = useState(0);
 
  
    
@@ -73,7 +74,25 @@ const fetchCasedata = async () => {
       toast.error('An unexpected error occurred ');
   }
 };
+const fetchFeedback= async () => {
+  try {
+      const result = await viewCount('getAllFeedbacks');
 
+      if (result.success) {
+          console.log(result);
+          if(result.user.length>0)
+            setFeeds(result.user);
+        else
+        setAdvocateCount([])
+      } else {
+          console.error('View Error :', result);
+          toast.error(result.message);
+      }
+  } catch (error) {
+      console.error('Unexpected error:', error);
+      toast.error('An unexpected error occurred ');
+  }
+};
     useEffect(() => {
     
     fetchdata();
@@ -121,8 +140,8 @@ const fetchCasedata = async () => {
             <div className="dashbord-box">
               <img className="image-adjust" src={complaintimg} />
               <div className="text-container">
-                <label className="count-label">{complaints.length}</label>
-                <label className="content-label">Complaints</label>
+                <label className="count-label">{feeds.length}</label>
+                <label className="content-label">Feedback</label>
               </div>
             </div>
           </div>
