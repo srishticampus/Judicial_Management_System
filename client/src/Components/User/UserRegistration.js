@@ -189,7 +189,7 @@ function UserRegistration() {
                                     type="date"
                                     className="form-control border border-dark"
                                     name="dob"
-                                  
+                                    max={new Date().toISOString().split("T")[0]}
                                     onChange={handleChange}
                                   
                                 />

@@ -20,7 +20,7 @@ function Advocate_ViewCaseRequest() {
 
           if (result.success) {
               console.log(result);
-              setData(result.user||null);
+              setData(result.user||[]);
           } else {
               console.error('Advocate View Error :', result);
               // toast.error(result.message);

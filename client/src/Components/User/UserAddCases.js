@@ -249,6 +249,7 @@ console.log(result)
                       name="dateOfIncident"
                       value={data.dateOfIncident}
                       onChange={handleChange}
+                      max={new Date().toISOString().split("T")[0]}
                     
                     />
                   </div>

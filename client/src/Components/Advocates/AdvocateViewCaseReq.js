@@ -189,7 +189,8 @@ function AdvocateViewCaseReq() {
                     </tr>
                     <tr>
                       <td>Evidence</td>
-                      <td>: <Link to="#" onClick={handleEvidenceClick}>Click here</Link></td>
+                      <td>: 
+                      <Link to="#" onClick={handleEvidenceClick}>Click here</Link></td>
                     </tr>
                   </tbody>
                 </table>
