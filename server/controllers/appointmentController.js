@@ -177,6 +177,8 @@ const rejectReqbyAdv = async (req, res) => {
 const getAppointmentReqsById = async (req, res) => {
     try {
       const appointments = await AppointmentReq.findById({_id:req.params.id}).populate('userId').populate('caseId').populate('advocateId');
+     console.log("app",appointments);
+     
       res.status(200).json({
         status: 200,
         msg: 'Appointments retrieved successfully',

@@ -16,7 +16,7 @@ function Advocate_ViewCaseRequest() {
       try {
         console.log("id",id);
         
-          const result = await ViewById('getAppointmentReqsById',id);
+          const result = await ViewById('getAppointmentReqsForAdv',id);
 
           if (result.success) {
               console.log(result);

@@ -371,6 +371,35 @@ const navigate=useNavigate()
                   {errors.experience && <div className="text-danger">{errors.experience}</div>}
                 </div>
 
+
+                <div className="row mt-3">
+
+                  <div className="col-6">
+
+                    <input
+                      type="password"
+                      class="form-control form-control-lg"
+                      id="exampleFormControlInput1"
+                      placeholder="Password"
+                      name="password"
+                      value={data.password}
+                      onChange={handleChange}
+                    /> {errors.password && <div className="text-danger">{errors.password}</div>}
+                  </div>
+                  <div className="col-6">
+
+                    <input
+                      type="password"
+                      class="form-control form-control-lg"
+                      id="exampleFormControlInput1"
+                      placeholder="Confirm Password"
+                      name="cpassword"
+                      value={data.cpassword}
+                      onChange={handleChange}
+                    /> {errors.cpassword && <div className="text-danger">{errors.cpassword}</div>}
+                  </div>
+                </div>
+
                 <div className="row mt-3">
 
 
@@ -418,36 +447,7 @@ const navigate=useNavigate()
                     </div>
                   </div>
                 </div>
-
-                <div className="row mt-3">
-
-                  <div className="col-6">
-
-                    <input
-                      type="password"
-                      class="form-control form-control-lg"
-                      id="exampleFormControlInput1"
-                      placeholder="Password"
-                      name="password"
-                      value={data.password}
-                      onChange={handleChange}
-                    /> {errors.password && <div className="text-danger">{errors.password}</div>}
-                  </div>
-                  <div className="col-6">
-
-                    <input
-                      type="password"
-                      class="form-control form-control-lg"
-                      id="exampleFormControlInput1"
-                      placeholder="Confirm Password"
-                      name="cpassword"
-                      value={data.cpassword}
-                      onChange={handleChange}
-                    /> {errors.cpassword && <div className="text-danger">{errors.cpassword}</div>}
-                  </div>
-                </div>
-
-                <div className="row mt-3">
+                <div className="row mt-5">
 
                   <button type="submit" className="btn btn-secondary advocateRegistrationbutton mt-3">
                     Register
