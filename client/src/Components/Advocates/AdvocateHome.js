@@ -120,7 +120,7 @@ const imageUrl=IMG_BASE_URL
                           <th scope="col">Email</th>
                           <th scope="col">Phone Number</th>
                           <th scope="col">Case Type</th>
-                          <th scope="col">Date of Request</th>
+                          <th scope="col">Date of Incident</th>
                           <th scope="col">Action</th>
                         </tr>
                       </thead>
