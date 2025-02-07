@@ -157,17 +157,17 @@ const imageUrl=IMG_BASE_URL
             <div className="col-lg-4 col-md-6 col-sm-12 mt-3 advocate_home_profile_container pb-2">
               <div className="container">
                 <div className="advocate_home_profile_container_img ">
-                  <img src={`${imageUrl}/${advocate.profilePic.filename}`} alt="Profile" />
+                  <img src={`${imageUrl}/${advocate?.profilePic?.filename}`} alt="Profile" />
                 </div>
                 <div className="advocate_home_profile_container_head">
                   <p className="advocate_home_profile_container_head_title">
-                    {advocate.name}
+                    {advocate?.name}
                   </p>
                   <p className="advocate_home_profile_container_head_subtitle mt-1">
-                    <span className="text-gold">{advocate.specialization}</span>
+                    <span className="text-gold">{advocate?.specialization}</span>
                   </p>
                   <p className="advocate_home_profile_container_head_subtitle mt-1">
-                    <span className="text-gold">{advocate.experience}</span> Years Of Experience
+                    <span className="text-gold">{advocate?.experience}</span> Years Of Experience
                   </p>
                 </div>
                 <div className="advocate_home_profile_container_body mt-3 text-wrap">
@@ -175,21 +175,21 @@ const imageUrl=IMG_BASE_URL
                     <thead>
                       <tr>
                         <td scope="col">Email Address</td>
-                        <td scope="col">{advocate.email}</td>
+                        <td scope="col">{advocate?.email}</td>
                       </tr>
                       <tr>
                         <td scope="col">Contact Number</td>
-                        <td scope="col">{advocate.contact}</td>
+                        <td scope="col">{advocate?.contact}</td>
                       </tr>
                       <tr>
                         <td scope="col">Bar Council Enrollment Number</td>
-                        <td scope="col">{advocate.bcNo}</td>
+                        <td scope="col">{advocate?.bcNo}</td>
                       </tr>
                      
                      
                       <tr>
                         <td scope="col">Specialization Areas</td>
-                        <td scope="col">{advocate.specialization}</td>
+                        <td scope="col">{advocate?.specialization}</td>
                       </tr>
                      
                     </thead>
@@ -220,7 +220,7 @@ const imageUrl=IMG_BASE_URL
               </button>
             </div>
             <div className="modal-body">
-              <img src={`${imageUrl}/${advocate.idProof.filename}`} className="img-fluid" alt="ID Proof" />
+              <img src={`${imageUrl}/${advocate?.idProof?.filename}`} className="img-fluid" alt="ID Proof" />
             </div>
             <div className="modal-footer">
               <button type="button" className="btn btn-secondary" onClick={toggleModal}>Close</button>

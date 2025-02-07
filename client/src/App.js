@@ -70,9 +70,11 @@ function App() {
           <Routes>
             {/* Common routes */}
             <Route path="/" element={(<LandingNavbar />, <Landingcarousel />)} />
-            <Route path="/aboutus" element={[<LandingNavbar />, <AboutUs />, <UserFooter />]} />
-            <Route path="/services" element={[<LandingNavbar />, <LandingServices />, <UserFooter />]} />
+            <Route path="/aboutus" element={[ <AboutUs />, <UserFooter />]} />
+            <Route path="/services" element={[ <LandingServices />, <UserFooter />]} />
             <Route path="/contactus" element={[<LandingNavbar />, <ContactUs />, <UserFooter />]} />
+            <Route path="/user_aboutus" element={[<UserNavbar />, <AboutUs />, <UserFooter />]} />
+            <Route path="/advocate_aboutus" element={[<AdvocateNavbar />, <AboutUs />, <UserFooter />]} />
 
 
 

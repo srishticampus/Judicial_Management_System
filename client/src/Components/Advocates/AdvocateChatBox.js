@@ -120,7 +120,7 @@ console.log(result);
   return (
     <div>
       <div className="advocate_chat">
-        {messageList.length ? (
+        {messageList?.length ? (
           <div className="adv_chat_container">
             <div className="chat-header">
               <img

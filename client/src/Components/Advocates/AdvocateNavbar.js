@@ -16,7 +16,9 @@ function AdvocateNavbar() {
   const handleLogout = () => {
     localStorage.removeItem('advocate');
         toast.success('Logged out successfully.');
-      navigate('/', { replace: true });
+      navigate('/'
+        // , { replace: true }
+      );
         setTimeout(() => {
       window.location.reload();
     }, 500); // Reload after a slight delay for toast to appear

@@ -66,3 +66,8 @@ body {
   border-radius: 15px;
   padding: 10px 25px;
 }
+
+
+.service-justify{
+  text-align: justify;
+}
