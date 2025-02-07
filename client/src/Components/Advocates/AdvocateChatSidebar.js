@@ -43,13 +43,13 @@ function AdvocateChatSidebar() {
           <div className="col-12">
            
 
-            {users.length == 0  ? (
+            {users?.length == 0  ? (
               <div className="adv_chat_sidebar_no_recipient">
                 <p>No Recipient found</p>
               </div>
             ) : (
               <div className="mt-5" >
-                {users.length
+                {users?.length
                   ? users.map((e) => {
                       return (
                         <div className="adv_chat_sidebar_name">

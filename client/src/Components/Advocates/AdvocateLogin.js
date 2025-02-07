@@ -123,7 +123,10 @@ function AdvocateLogin() {
                                                 <button type="reset">Reset</button>
                                             </div>
                                             <div className="mt-2 mb-5 container  ">
-                      Don't Have An Account ?  <Link className="vo-login-forgotpswd user-login-link" to="user-regd:\ChristNagar 24\Legal_Liaison\client\src\Components\User\UserProfile.js">Sign Up </Link>
+                      Don't Have An Account ?  <Link className="vo-login-forgotpswd user-login-link"
+                      //  to="user-regd:\ChristNagar 24\Legal_Liaison\client\src\Components\User\UserProfile.js"
+                      to="/att-signup"
+                       >Sign Up </Link>
                       </div>
     
                                         </form>  </div>
