@@ -58,7 +58,9 @@ import { login } from "../Services/CommonServices";
               console.log(result);
               if (result.success) {
                 
-                localStorage.setItem('user', result.user._id)      
+                localStorage.setItem('user',result.user._id)
+                // console.log(result.user._id);
+                      
                      
                 navigate('/user-home');
     

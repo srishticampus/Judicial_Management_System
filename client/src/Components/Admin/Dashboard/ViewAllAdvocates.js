@@ -80,8 +80,8 @@ function ViewAllAdvocates() {
                 <th className="table-header">Bar council Enrolment No</th>
                 <th className="table-header">Advocate Name</th>
                 <th className="table-header">Specialization areas</th>
-                <th className="table-header">Bar Council Area</th>
-                <th className="table-header">Educational qualification</th>
+                <th className="table-header">Contact</th>
+                {/* <th className="table-header">Educational qualification</th> */}
                 <th className="table-header">Years of Experience</th>
                 <th className="table-header">View full Details</th>
                 <th className="table-header">User Status</th>
@@ -94,8 +94,8 @@ function ViewAllAdvocates() {
                     <td className="table-data">{advocate.bcNo}</td>
                     <td className="table-data">{advocate.name}</td>
                     <td className="table-data">{advocate.specialization}</td>
-                    <td className="table-data">{advocate.bcState}</td>
-                    <td className="table-data">{advocate.qualification}</td>
+                    <td className="table-data">{advocate.email}</td>
+                    {/* <td className="table-data">{advocate.qualification}</td> */}
                     <td className="table-data">{advocate.experience} years</td>
                     <td className="table-data">
                       <Link to={`/admin_view_single_advocate/${advocate._id}`}>
@@ -133,8 +133,9 @@ function ViewAllAdvocates() {
         </div>
       ) : (
         <div className="no_data_animation">
-          <Lottie animationData={noData} className="no_data_animation" />
-          
+          {/* <Lottie animationData={noData} className="no_data_animation" /> */}
+          <h1 className="text-center">No New Requests</h1>
+
         </div>
       )}
       

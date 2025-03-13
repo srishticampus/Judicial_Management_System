@@ -218,7 +218,7 @@ const viewAdvocateReqs = (req, res) => {
 
 // approve Advocate
 const approveAdvocateById = (req, res) => {
-    Advocate.findByIdAndUpdate({_id:req.params.id},{adminApproved:true})
+    Advocate.findByIdAndUpdate({_id:req.params.id},{adminApproved:true,isActive:true})
         .exec()
         .then(data => {
             if (data.length > 0) {

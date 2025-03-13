@@ -6,6 +6,9 @@ import '../../Styles/AdminNav.css'
 function UserNavbar() {
 
     const navigate=useNavigate();
+    const userId=localStorage.getItem('user')
+    console.log(userId);
+    
 
     useEffect(()=>{
         if(localStorage.getItem('user'==null)){

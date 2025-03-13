@@ -96,7 +96,7 @@ function UserRegistration() {
 
             } else {
                 console.error('Registration error:', result);
-                toast.error(result.message);
+                toast.info(result.message);
             }
         } catch (error) {
             console.error('Unexpected error:', error);

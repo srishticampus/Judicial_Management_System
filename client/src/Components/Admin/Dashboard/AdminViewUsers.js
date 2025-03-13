@@ -132,8 +132,9 @@ function AdminViewUsers() {
         </>
       ) : (
         <div className="no_data_animation">
-          <Lottie animationData={noData} className="no_data_animation" />
-          
+          {/* <Lottie animationData={noData} className="no_data_animation" /> */}
+          <h1 className="text-center">No New Requests</h1>
+
         </div>
       )}
       

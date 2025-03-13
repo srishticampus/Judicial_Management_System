@@ -106,8 +106,8 @@ function COViewAllCases() {
         </div>
       ) : (
         <div className="no_data_animation">
-          <Lottie animationData={noReqFound} className="no_data_animation" />
-          <h1 className="text-center">No New Requests</h1>
+          {/* <Lottie animationData={noReqFound} className="no_data_animation" /> */}
+          <h1 className="text-center">No New Requests Found</h1>
         </div>
       )}
     </div>

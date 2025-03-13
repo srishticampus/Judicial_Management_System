@@ -7,7 +7,7 @@ import axios from 'axios';
             const response = await axios.post(`${API_BASE_URL}/${api}`);
       console.log("api called",response);
       
-            if (response.status === 200) {
+            if (response.data.status === 200) {
                 return { success: true, user: response.data.data};
             } else {
                 return { success: false, message: response.data.msg };

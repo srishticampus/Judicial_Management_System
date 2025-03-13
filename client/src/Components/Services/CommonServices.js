@@ -69,7 +69,7 @@ export const registerWithFile = async (data, api) => {
         });
         console.log(response);
 
-        if (response.status === 200) {
+        if (response.data.status === 200) {
             const { result } = response.data;
             return { success: true, user: response.data.data };
         } else {
