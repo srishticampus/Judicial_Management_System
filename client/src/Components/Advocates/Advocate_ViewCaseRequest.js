@@ -92,7 +92,8 @@ function Advocate_ViewCaseRequest() {
         </div>
       ) : (
         <div className="no_data_animation">
-          <Lottie animationData={noData} className="no_data_animation" />
+          {/* <Lottie animationData={noData} className="no_data_animation" /> */}
+          <h1 className="text-center">No Recent Cases</h1>
         </div>
       )}
     </div>

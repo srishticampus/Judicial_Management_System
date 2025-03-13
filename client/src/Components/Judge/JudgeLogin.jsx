@@ -57,7 +57,7 @@ function JudgeLogin() {
               console.log(result);
               if (result.success) {
                 
-                localStorage.setItem('judge', result.user._id)      
+                localStorage.setItem('judge',result.user._id)      
                      
                 navigate('/judge-home');
     

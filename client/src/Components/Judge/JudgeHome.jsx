@@ -17,7 +17,7 @@ function JudgeHome() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (localStorage.getItem('judge') == null) {
+    if (localStorage.getItem('judge') === null) {
       navigate('/');
     }
   }, [navigate]);

@@ -42,7 +42,7 @@ function COSidebar() {
     <div className='row-4'>
         <div className='admin-sidebar'>
         <div className='profile-div'>
-            <Link to={'/admin-dashboard'}>
+            <Link >
             <div className='row'>
                 <div className='col-md-4 col-sm-12'>
                     <img className='img-style' src={profile} alt='Profile' />

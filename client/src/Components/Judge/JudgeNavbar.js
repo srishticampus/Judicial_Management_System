@@ -5,18 +5,18 @@ import { toast } from "react-toastify";
 
 function JudgeNavbar() {
   const navigate = useNavigate();
-  const advocateId = localStorage.getItem("advocate");
+  const id = localStorage.getItem('judge');
 
   useEffect(() => {
-    if (localStorage.getItem("advocate") == null) {
+    if (localStorage.getItem("judge") == null) {
       navigate("/");
     }
   }, [navigate]);
 
   const handleLogout = () => {
-    localStorage.removeItem('advocate');
+    localStorage.removeItem('judge');
     toast.success('Logged out successfully.');
-    navigate('/advocate-login');
+    navigate('/judge-login');
   };
 
   return (

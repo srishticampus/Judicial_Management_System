@@ -35,7 +35,7 @@ function COViewUsers() {
   }, []);
   return (
     <div className="main-div">
-<h3 className="admin-user-req-link"><Link to='/admin-userreqs' className="admin-user-req-linkh3" >Registered Users</Link></h3>
+{/* <h3 className="admin-user-req-link"><Link to='/admin-userreqs' className="admin-user-req-linkh3" >Registered Users</Link></h3> */}
     
       {data.length !== 0 ? (
         <>

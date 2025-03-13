@@ -64,3 +64,11 @@
   background-color: #AA9166;
   border-radius: 5px;
 }
+
+.co_view_singlecase_addhearing_inp select, input{
+  width: 200px;
+}
+.adv_case_req_left_container1_content textarea{
+  width: 300px;
+  height: 80px;
+}

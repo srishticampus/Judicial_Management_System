@@ -19,67 +19,70 @@ function AdminViewAdvReqs() {
 
   const [data, setData] = useState([]);
 
-  const handleApprove = async(id) => {
-    try {
-      const result = await approveById('approveAdvocateById',id);
 
-      if (result.success) {
-          console.log(result);
-         fetchdata()
-      } else {
-          console.error('View Error :', result);
-          toast.error(result.message);
-      }
-  } catch (error) {
-      console.error('Unexpected error:', error);
-      toast.error('An unexpected error occurred during login');
-  }
-    
-  };
-
-  const handleReject =async (id) => {
-    try {
-      const result = await approveById('rejectAdvocateById',id);
-
-      if (result.success) {
-          console.log(result);
-        fetchdata()
-      } else {
-          console.error(' View Error :', result);
-          toast.error(result.message);
-      }
-  } catch (error) {
-      console.error('Unexpected error:', error);
-      toast.error('An unexpected error occurred during login');
-  }
-  };
   const fetchdata = async () => {
     try {
-        const result = await viewCount('viewAdvocateReqs');
+      const result = await viewCount("viewAdvocateReqs");
 
-        if (result.success) {
-            console.log(result);
-            if(result.user.length>0)
-            setData(result.user);
-          else
-          setData([])
-        } else {
-            console.error('Village Office View Error :', result);
-            toast.error(result.message);
-        }
+      if (result.success) {
+        console.log(result);
+        // if (result.user.length >= 0) setData(result.user || []);
+        // else setData([]);
+        setData(result.user.length > 0 ? [...result.user] : []);
+      } else {
+        console.error(" View Error :", result);
+      }
     } catch (error) {
-        console.error('Unexpected error:', error);
-        toast.error('An unexpected error occurred during login');
+      console.error("Unexpected error:", error);
     }
-};
+  };
   useEffect(() => {
-  
-  fetchdata();
+    fetchdata();
   }, []);
 
+
+  const handleApprove = async (id) => {
+    try {
+      const result = await approveById("approveAdvocateById", id);
+  
+      if (result.success) {
+        console.log(result);
+        toast.success("Approved Successfully");
+        // fetchdata();
+        setData((prevData) => prevData.filter((advocate) => advocate._id !== id));  
+      } else {
+        console.error("View Error :", result);
+      }
+    } catch (error) {
+      console.error("Unexpected error:", error);
+    }
+  };
+  
+
+  const handleReject = async (id) => {
+    try {
+      const result = await approveById("rejectAdvocateById", id);
+
+      if (result.success) {
+        console.log(result);
+        // fetchdata();
+        setData((prevData) => prevData.filter((advocate) => advocate._id !== id));
+      } else {
+        console.error(" View Error :", result);
+        toast.error(result.message);
+      }
+    } catch (error) {
+      console.error("Unexpected error:", error);
+    }
+  };
+
+  useEffect(() => {
+    console.log("Data updated:", data);
+  }, [data]);
+  
   return (
     <div className="main-div">
-      {data.length !== 0 ? (
+      {data?.length !== 0 ? (
         <div className="table-container table-striped">
           <table className="table-change container-fluid">
             <thead className="admin-tab-head">
@@ -96,7 +99,7 @@ function AdminViewAdvReqs() {
               </tr>
             </thead>
             <tbody>
-              {data.length ? (
+              {data&&data?.length ? (
                 data.map((advocate) => (
                   <tr key={advocate._id}>
                     <td className="table-data">{advocate.bcNo}</td>
@@ -132,7 +135,9 @@ function AdminViewAdvReqs() {
                 ))
               ) : (
                 <tr>
-                  <td colSpan="9" className="text-center">No Data obtained</td>
+                  <td colSpan="9" className="text-center">
+                    No Data obtained
+                  </td>
                 </tr>
               )}
             </tbody>
@@ -140,7 +145,7 @@ function AdminViewAdvReqs() {
         </div>
       ) : (
         <div className="no_data_animation">
-          <Lottie animationData={noReqFound} className="no_data_animation" />
+          {/* <Lottie animationData={noReqFound} className="no_data_animation" /> */}
           <h1 className="text-center">No New Requests</h1>
         </div>
       )}

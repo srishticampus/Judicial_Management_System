@@ -153,7 +153,7 @@ const navigate=useNavigate()
             console.log(result);
 
             toast.success('Registration successful!');
-            navigate('/advocate-login');
+            // navigate('/advocate-login');
 
 
         } else {

@@ -34,7 +34,7 @@ const navigate=useNavigate()
  
         const result =await ViewById('getCaseByUserId',id);
   
-        const reversedArray = result.user.reverse();
+        const reversedArray = result?.user?.reverse();
         setArray(reversedArray);
         setFilteredArray(reversedArray);console.log(result)
 
@@ -250,10 +250,10 @@ const navigate=useNavigate()
                   </table>
                 ) : (
                   <div className="no_data_animation">
-                    <Lottie
+                    {/* <Lottie
                       animationData={noReqFound}
                       className="no_data_animation"
-                    />
+                    /> */}
                     <h1 className="text-center">No Recent Cases</h1>
                   </div>
                 )}

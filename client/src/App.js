@@ -55,6 +55,8 @@ import User_ViewAllAdvocates from './Components/User/User_ViewAllAdvocates';
 import User_ViewAdvocateDetail from './Components/User/User_ViewAdvocateDetail.jsx';
 import UserAddFeedbacks from './Components/User/UserAddFeedbacks.js';
 
+import ViewProfile_AllAdvocate from './Components/Admin/Dashboard/ViewProfile_AllAdvocate.js';
+
 function App() {
   return (
     <div className="App">
@@ -91,7 +93,7 @@ function App() {
             <Route path="/admin_view_feedbacks" element={[<AdminNav />, <AdminMain data="admin_view_feedbacks" />, <AdminFooter />]} />
             <Route path="/admin_view_single_case/:id" element={[<AdminNav />, <AdminMain data="viewSingleCase" />, <AdminFooter />]} />
 
-
+            <Route path='/admin_view_single_advocate/:id' element={[<AdminNav />,<ViewProfile_AllAdvocate/>,<AdminFooter />]}/>
 
             {/* user */}
             <Route path="/user-reg" element={[<LandingNavbar />, <UserRegistration />, <UserFooter />]} />

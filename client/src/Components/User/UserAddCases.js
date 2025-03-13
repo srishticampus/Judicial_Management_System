@@ -95,6 +95,9 @@ console.log(result)
       if (result.success) {
         console.log(result);
         setAdvSug(result.suggestions||[]);
+        setCaseId(result.user._id)
+        console.log("case Id"+result.user._id);
+        
 
         toast.success('Case Added successfully!');
         // navigate('/user-login');
@@ -207,7 +210,7 @@ console.log(result)
                         Select your Specialization Area
                       </option>
                       <option value="Criminal Law">Criminal Law</option>
-                      <option value="Civil Law">Civil Law</option>
+                      <option value="Civil Litigation">Civil Litigation</option>
                       <option value="Family Law">Family Law</option>
                       <option value="Corporate Law">Corporate Law</option>
                       <option value="Intellectual Property Law">
