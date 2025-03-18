@@ -304,7 +304,7 @@ function COViewSinglecase() {
                           onChange={handleAdvChange}
                           className="ms-2"
                         >
-                          <option value="">Choose Advocate</option>
+                          <option value="">Choose Judge</option>
                           {console.log(advocate.length)}
                           {advocate.length > 0
                             ? advocate.map((x) => {

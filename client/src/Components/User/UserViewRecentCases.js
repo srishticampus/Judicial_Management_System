@@ -40,7 +40,7 @@ const navigate=useNavigate()
 
       } catch (error) {
         console.error('Unexpected error:', error);
-        toast.error('An unexpected error occurred during Registration');
+        // toast.error('An unexpected error occurred during Registration');
       }
   
 }

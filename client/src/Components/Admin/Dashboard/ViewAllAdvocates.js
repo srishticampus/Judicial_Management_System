@@ -70,7 +70,7 @@ function ViewAllAdvocates() {
 
   return (
     <div className="main-div">
-      <Link to="/admin-adv-reqs">View Advocate request</Link>
+      <Link to="/admin-adv-reqs" className="admin-user-req-linkh3" style={{fontSize:"20px",fontWeight:"700"}}>View Advocate request</Link>
 
       {data.length >0 ? (
         <div className="table-container table-striped">
