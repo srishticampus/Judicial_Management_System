@@ -23,12 +23,12 @@ function JudgeNavbar() {
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark landing_custom_navbar" style={{ minHeight: "10vh" }}>
         <div className="container">
-          <Link className="navbar-brand" to="#home">
+          {/* <Link className="navbar-brand" to="#home"> */}
             <img alt="Logo" src={img1} width="50" height="50" className="d-inline-block align-top" />{" "}
             JudiSys
-          </Link>
+          {/* </Link> */}
           <button
-            className="navbar-toggler"
+            className="navbar-toggler"  
             type="button"
             data-toggle="collapse"
             data-target="#navbarNav"

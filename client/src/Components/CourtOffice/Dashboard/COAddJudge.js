@@ -121,10 +121,10 @@ function COAddJudge() {
         errors.experience = validateField('Experience', data.experience);
 
 
-        errors.regno = validateField('Register Number', data.regno);
+        // errors.regno = validateField('Register Number', data.regno);
         errors.specialization = validateField('Specialization', data.specialization);
         errors.password = validateField('Password', data.password);
-        errors.cpassword = validateField('Confirm Password', data.cpassword);
+        // errors.cpassword = validateField('Confirm Password', data.cpassword);
         errors.contact = validateField2('contact', data.contact);
         errors.email = validateField3('email', data.email);
         errors.password = validateField3('password', data.password);
@@ -135,8 +135,14 @@ function COAddJudge() {
 
         setErrors(errors);
 
-        if (formIsValid) {
-            console.log("data", data);
+        formIsValid = Object.values(errors).every((error) => error === ''); 
+
+        if (!formIsValid) {
+            console.log("Validation failed", errors);
+            return; // Stop execution if there are validation errors
+        }
+        // if (formIsValid) {
+        //     console.log("data", data);
             try {
 
                 const result = await register(data, 'registerJudge');
@@ -154,9 +160,9 @@ function COAddJudge() {
                 }
             } catch (error) {
                 console.error('Unexpected error:', error);
-                toast.error('An unexpected error occurred during Registration');
+                // toast.error('An unexpected error occurred during Registration');
             }
-        }
+        // }
     };
 
     return (

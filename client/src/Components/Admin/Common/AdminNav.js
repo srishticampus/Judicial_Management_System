@@ -21,7 +21,7 @@ function AdminNav() {
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark landing_custom_navbar nav">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="#home">
+          {/* <Link className="navbar-brand" to="#home"> */}
             <img
               alt="Logo"
               src={img1}
@@ -30,7 +30,7 @@ function AdminNav() {
               className="d-inline-block align-top logo-adjust"
             />{" "}
             JudiSys
-          </Link>
+          {/* </Link> */}
           <button
             className="navbar-toggler"
             type="button"

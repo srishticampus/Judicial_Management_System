@@ -7,7 +7,7 @@ function LandingNavbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark landing_custom_navbar landing_custom_-right">
       <div className="container-fluid ">
-        <Link className="navbar-brand" to="#home">
+        {/* <Link className="navbar-brand" to="#home"> */}
           <img
             alt="Logo"
             src={img1}
@@ -16,7 +16,7 @@ function LandingNavbar() {
             className="d-inline-block align-top"
           />{' '}
           JudiSys
-        </Link>
+        {/* </Link> */}
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>

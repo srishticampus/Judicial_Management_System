@@ -11,7 +11,7 @@ function UserNavbar() {
     
 
     useEffect(()=>{
-        if(localStorage.getItem('user'==null)){
+        if(userId===null){
             navigate('/')
         }
     })
@@ -19,9 +19,9 @@ function UserNavbar() {
     const handleLogout = () => {
       localStorage.removeItem('user');
         navigate("/");
-        setTimeout(() => {
-          window.location.reload();
-        }, 500);
+        // setTimeout(() => {
+        //   window.location.reload();
+        // }, 500);
        
       };
 
@@ -29,7 +29,7 @@ function UserNavbar() {
     <div>
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark landing_custom_navbar landing_custom_-right">
     <div className="container-fluid">
-        <Link className="navbar-brand" to="#home">
+        {/* <Link className="navbar-brand" to="#home"> */}
         <img
             alt="Logo"
             src={img1}
@@ -38,7 +38,7 @@ function UserNavbar() {
             className="d-inline-block align-top"
           />{' '}
           JudiSys
-        </Link>
+        {/* </Link> */}
         <button className="navbar-toggler" 
         type="button" 
         data-toggle="collapse" 
