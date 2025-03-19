@@ -178,11 +178,11 @@ function JudgeHome() {
                     </thead>
                    
                   </table>
-                  <div className="advocate_home_edit_btn text-center mt-3">
+                  {/* <div className="advocate_home_edit_btn text-center mt-3">
                     <Link to={`/advocate_edit_profile`}>
                       <button type="submit">Edit</button>
                     </Link>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
