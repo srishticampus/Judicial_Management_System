@@ -178,9 +178,17 @@ function JudgeViewCases() {
                       <td>Evidence</td>
                       <td>: <Link to="#" onClick={handleEvidenceClick}>Click here</Link></td>
                     </tr>
+                    <tr>
+                      <td>Advocate Name</td>
+                      <td>: {data?.advocateId?.name}</td>
+                    </tr>
+                    <tr>
+                      <td>Bar Council Number</td>
+                      <td>: {data?.advocateId?.bcNo}</td>
+                    </tr>
                   </tbody>
                 </table>
-                <div className="adv_view_case_req_actions text-center mt-5">
+                <div className="adv_view_case_req_actions text-center ">
                   <button className="btn bg-gold" onClick={handleViewHearingDetails}>Hearing Deatils</button>
                 </div>
               </div>

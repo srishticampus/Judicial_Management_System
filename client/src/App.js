@@ -94,6 +94,7 @@ function App() {
             <Route path="/admin_view_single_case/:id" element={[<AdminNav />, <AdminMain data="viewSingleCase" />, <AdminFooter />]} />
 
             <Route path='/admin_view_single_advocate/:id' element={[<AdminNav />,<ViewProfile_AllAdvocate/>,<AdminFooter />]}/>
+            <Route path="/admin_view_judges" element={[<AdminNav />, <AdminMain data="admin_view_judges" />, <AdminFooter />]} />
 
             {/* user */}
             <Route path="/user-reg" element={[<LandingNavbar />, <UserRegistration />, <UserFooter />]} />
@@ -137,6 +138,8 @@ function App() {
 
             <Route path="co-view-single-judge/:id" element={[<AdminNav />, <COMain data="co-view-single-judge" />, <AdminFooter />]} />
             <Route path="co-view-singleCase/:id" element={[<AdminNav />, <COMain data="co-view-singleCase" />, <AdminFooter />]} />
+            <Route path="co_view_AllAccepted_Cases" element={[<AdminNav />, <COMain data="co_view_AllAccepted_Cases" />, <AdminFooter />]} />
+            <Route path="co_view_AllAcceptedCases_Single/:id" element={[<AdminNav />, <COMain data="co_view_AllAcceptedCases_Single" />, <AdminFooter />]} />
 
 
             {/* Judge */}

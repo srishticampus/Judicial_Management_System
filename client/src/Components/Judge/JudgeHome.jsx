@@ -110,7 +110,7 @@ function JudgeHome() {
                         </tr>
                       </thead>
                       <tbody>
-                        {data.slice(0, 4).map((caseReq) => (
+                        {Array.isArray(data) && data?.slice(0,4).map((caseReq) => (
                           <tr key={caseReq._id}>
                             <td>{caseReq.userId.name}</td>
                             <td>{caseReq.userId.email}</td>

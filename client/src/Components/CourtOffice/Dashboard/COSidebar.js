@@ -78,6 +78,14 @@ function COSidebar() {
 
                 </Link>
                 </div>
+
+                <div className='adjust-space'>
+                <img src={casesimg} className='image-adjust-1 padding each' alt='User image'/>{' '},{' '},{' '}
+                <Link to={'/co_view_AllAccepted_Cases'}>
+                <label className='label-sub'>Accepted Cases</label>
+
+                </Link>
+                </div>
                
                 <div className='adjust-space'>
                 <img src={juniorimg} className='image-adjust-1 padding each' alt='User image'/>{' '},{' '},{' '}
