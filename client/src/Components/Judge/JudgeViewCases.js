@@ -103,17 +103,20 @@ function JudgeViewCases() {
                           <th scope="col">Email</th>
                           <th scope="col">Phone Number</th>
                           <th scope="col">Case Type</th>
+                          <th scope="col">Advocate Name</th>
                           <th scope="col">Date of Request</th>
                           <th scope="col">Action</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {data.map((caseReq) => (
+                        {data&&
+                        data?.map((caseReq) => (
                           <tr key={caseReq._id}>
                             <td>{caseReq.userId.name}</td>
                             <td>{caseReq.userId.email}</td>
                             <td>{caseReq.userId.contact}</td>
                             <td>{caseReq.type}</td>
+                            <td>{caseReq.advocateId.name}</td>
                             <td>{caseReq.dateOfIncident.slice(0,10)}</td>
                             <td>
                               <Link to={`/judge_view_single_case_req/${caseReq._id}`}>

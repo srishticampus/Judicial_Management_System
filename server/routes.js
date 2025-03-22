@@ -63,6 +63,7 @@ router.post('/getCaseAdvStatus',cases.getCaseAdvStatus)
 router.post('/assignJudgeCaseById/:id',cases.assignJudgeCaseById)
 router.post('/getCaseByJudgeId/:id',cases.getCaseByJudgeId)
 router.post('/getClosedCaseByJudgeId/:id',cases.getClosedCaseByJudgeId)
+router.post('/getCasesJudgeAssign',cases.getCasesJudgeAssign)
 
 // Appointments
 router.post('/createAppointment',appointments.createAppointment)

@@ -11,6 +11,7 @@ import rentimg from '../../../Assets/recentIcon6.png'
 import { toast } from 'react-toastify';
 import { Modal, Button } from 'react-bootstrap';
 import profile from '../../../Assets/5856.jpg'
+import judge from "../../../Assets/judgeicon.png"
 
 
 
@@ -75,6 +76,13 @@ function AdminSidebar() {
                 <img src={casesimg} className='image-adjust-1 padding each' alt='User image'/>{' '},{' '},{' '}
                 <Link to={'/admin_view_cases'}>
                 <label className='label-sub'>Cases</label>
+
+                </Link>
+                </div>
+                <div className='adjust-space'>
+                <img src={judge} className='image-adjust-1 padding each' alt='User image'/>{' '},{' '},{' '}
+                <Link to={'/admin_view_judges'}>
+                <label className='label-sub'>View Judges</label>
 
                 </Link>
                 </div>

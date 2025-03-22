@@ -19,6 +19,7 @@ import AdminViewPayment from "./AdminViewPayment";
 import AdminViewUserReqs from "./AdminViewUserReqs";
 import AdminViewAdvReqs from "./AdminViewAdvReqs";
 import AdminViewFeedbacks from "./AdminViewFeedbacks";
+import AdminViewJudjes from "./AdminViewJudjes";
 
 function AdminMain({ data }) {
   const navigate = useNavigate(); 
@@ -74,7 +75,10 @@ function AdminMain({ data }) {
           ) : data === "admin-userreqs" ? (
             <AdminViewUserReqs />
           
-          ) : (
+          ) : data === "admin_view_judges"?(
+            <AdminViewJudjes/>
+          )
+           : (
             <AdminLogin />
           )}
         </div>

@@ -68,7 +68,7 @@ const getStatusByCaseId = async (req, res) => {
 
     try {
         const status = await Casestatus.find({caseId:req.params.id})
-        .sort({createdAt:-1}).populate('advocateId').populate('userId');
+        .sort({createdAt:-1}).populate('advocateId').populate('userId') .populate('caseId') .populate('judgeId');
         if (!status) {
             return res.json({status:500,
                 message: 'Status not found' });

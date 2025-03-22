@@ -16,8 +16,9 @@ function JudgeNavbar() {
   const handleLogout = () => {
     localStorage.removeItem('judge');
     toast.success('Logged out successfully.');
-    navigate('/judge-login');
-  };
+    setTimeout(() => {
+      navigate('/judge-login');
+    }, 500);   };
 
   return (
     <div>

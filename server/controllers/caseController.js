@@ -373,6 +373,34 @@ const getCaseType = (req, res) => {
     data: data,
   });
 };
+
+
+
+//get cases by judge and advocate assign
+const getCasesJudgeAssign = async (req, res) => {
+  try {
+    const caseItem = await Case.find({ advocateStatus:'true',judgeStatus:true }).populate('advocateId').populate('userId');
+    if (!caseItem) {
+      return res.json({
+        status: 404,
+        msg: "No Cases found",
+        data:[]
+      });
+    }
+    res.json({
+      status: 200,
+      data: caseItem,
+      msg: "data obtained succesfully",
+    });
+  } catch (err) {
+    res.json({
+      status: 500,
+      msg: "Error retrieving case",
+      data: err,
+    });
+  }
+};
+
 module.exports = {
   createCase,
   getAllCases,
@@ -385,5 +413,6 @@ module.exports = {
   getCaseByUserId,
   assignJudgeCaseById,
   getCaseByJudgeId  ,
-  getClosedCaseByJudgeId
+  getClosedCaseByJudgeId,
+  getCasesJudgeAssign
 };

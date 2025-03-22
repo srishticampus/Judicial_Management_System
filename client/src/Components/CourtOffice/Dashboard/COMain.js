@@ -12,6 +12,8 @@ import COViewSIngleJudge from "./COViewSIngleJudge";
 import COViewAllCases from "./COViewAllCases";
 import COViewSinglecase from "./COViewSinglecase";
 import COViewUsers from "./COViewUsers";
+import COViewAllCasesAccepted from "./COViewAllCasesAccepted";
+import CoViewAcceptedCaseSingle from "./CoViewAcceptedCaseSingle";
 
 function COMain({ data }) {
   const navigate = useNavigate(); 
@@ -46,7 +48,12 @@ function COMain({ data }) {
                 <COViewSinglecase />
               ) : data === "co-viewallusers" ? (
                 <COViewUsers />
-          ) : (
+          ) : data === "co_view_AllAccepted_Cases" ?(
+            <COViewAllCasesAccepted/>
+          ): data === "co_view_AllAcceptedCases_Single"?(
+            <CoViewAcceptedCaseSingle/>
+          )
+           : (
             <COLogin />
           )}
         </div>
