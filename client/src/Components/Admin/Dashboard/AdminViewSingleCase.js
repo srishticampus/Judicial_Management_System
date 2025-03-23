@@ -123,15 +123,15 @@ function AdminViewSingleCase() {
                     <div className="px-3">
                       <img src={icon1} alt="icon1" />
                     </div>
-                    <div>{data.userId.name}</div>
+                    <div className=" text-break">{data.userId.name}</div>
                   </div>
                   <div className="d-flex mt-2">
                     <div className="px-3">
                       <img src={icon2} alt="icon2" />
                     </div>
-                    <div>{data.userId.email}</div>
+                    <div className=" text-break">{data.userId.email}</div>
                   </div>
-                  <div className="d-flex mt-2">
+                  <div className="d-flex mt-3">
                     <div className="px-3">
                       <img src={icon3} alt="icon3" />
                     </div>
@@ -141,14 +141,14 @@ function AdminViewSingleCase() {
                     <div className="px-3">
                       <img src={icon4} alt="icon4" />
                     </div>
-                    <div>{data.userId.address}</div>
+                    <div className=" text-break">{data.userId.city}</div>
                   </div>
-                  <div className="d-flex mt-2">
+                  {/* <div className="d-flex mt-2">
                     <div className="px-3">
                       <img src={icon5} alt="icon5" />
                     </div>
                     <div>{data.userId.nationality}</div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
